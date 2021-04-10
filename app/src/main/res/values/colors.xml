@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="tab_active">#FFB35B</color>
+    <color name="bottom_btn_bgrnd_tint">#FF222222</color>
+    <color name="bottom_btn_text">#FFFFFFFF</color>
 </resources>
