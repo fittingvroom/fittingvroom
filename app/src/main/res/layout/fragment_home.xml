@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_gradient_shape"
     tools:context=".ui.home.HomeFragment">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
+        android:id="@+id/home_bottom_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/BottomButtonTheme"
