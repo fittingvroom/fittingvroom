@@ -12,4 +12,6 @@
     <color name="bottom_btn_text">#FFFFFFFF</color>
     <color name="transparent_background">#00FFFFFF</color>
     <color name="home_page_description_text1">#FF222222</color>
+    <color name="layout_background_gradient_start">#FF8BA2B9</color>
+    <color name="layout_background_gradient_end">#FFFFFFFF</color>
 </resources>
