@@ -12,8 +12,6 @@
         android:id="@+id/logo_view"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:scaleX="1"
-        android:scaleY="1"
         android:background="@color/transparent_background"
         android:src="@drawable/logo"
         app:layout_constraintEnd_toStartOf="@id/guideline1"
