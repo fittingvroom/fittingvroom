@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mannequin_help_image_width">30dp</dimen>
+    <dimen name="mannequin_help_image_height">30dp</dimen>
+    <dimen name="mannequin_help_image_margin_top">24dp</dimen>
+    <dimen name="mannequin_help_image_margin_end">24dp</dimen>
+    <dimen name="mannequin_share_image_width">30dp</dimen>
+    <dimen name="mannequin_share_image_height">30dp</dimen>
+    <dimen name="mannequin_share_image_margin_top">24dp</dimen>
+    <dimen name="mannequin_share_image_margin_end">24dp</dimen>
+</resources>

@@ -32,4 +32,6 @@
     <string name="home_page_bottom_btn_text">Создать манекен</string>
     <string name="home_page_description_first_line">Вы поймете, что вам действительно подходит</string>
     <string name="home_page_description_second_line">не выходя из приложения</string>
+    <string name="model_screen_bottom_btn_text">Добавить параметры</string>
+    <string name="model_toolbar_title">Создать модель</string>
 </resources>
