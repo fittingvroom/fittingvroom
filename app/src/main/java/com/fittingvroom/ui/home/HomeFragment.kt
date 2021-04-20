@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.fittingvroom.R
 import com.fittingvroom.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding? = null
+    private val navigation by lazy { findNavController() }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -26,7 +29,7 @@ class HomeFragment : Fragment() {
     private fun init() {
         val bind = binding ?: return
         bind.homeBottomButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Добавить/изменить параметры", Toast.LENGTH_SHORT).show()
+            navigation.navigate(R.id.action_navigation_home_to_navigation_model)
         }
     }
 

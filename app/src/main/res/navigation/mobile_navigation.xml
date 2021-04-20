@@ -9,13 +9,29 @@
         android:id="@+id/navigation_home"
         android:name="com.fittingvroom.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_model"
+            app:destination="@id/navigation_model"
+            app:popUpTo="@id/navigation_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_fitting"
+        android:name="com.fittingvroom.ui.fitting.FittingFragment"
+        android:label="@string/title_fitting"
+        tools:layout="@layout/fragment_fitting" />
 
     <fragment
         android:id="@+id/navigation_model"
         android:name="com.fittingvroom.ui.model.ModelFragment"
-        android:label="@string/title_model"
-        tools:layout="@layout/fragment_model" />
+        android:label="fragment_model"
+        tools:layout="@layout/fragment_model">
+        <action
+            android:id="@+id/action_navigation_model_to_help_fragment"
+            app:destination="@id/help_fragment"
+            app:popUpTo="@id/navigation_model" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorites"
@@ -28,4 +44,12 @@
         android:name="com.fittingvroom.ui.cart.CartFragment"
         android:label="@string/title_cart"
         tools:layout="@layout/fragment_cart" />
+
+
+
+    <fragment
+        android:id="@+id/help_fragment"
+        android:name="com.fittingvroom.ui.help.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" />
 </navigation>
