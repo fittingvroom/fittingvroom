@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.fittingvroom.databinding.FragmentHelpBinding
 
 class HelpFragment : Fragment() {
 
     private var _binding: FragmentHelpBinding? = null
     private val binding get() = _binding!!
+    private val navigation by lazy { findNavController() }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,7 +23,7 @@ class HelpFragment : Fragment() {
         _binding = FragmentHelpBinding.inflate(inflater, container, false)
         val view = binding.root
         binding.btOk.setOnClickListener {
-            Toast.makeText(requireContext(), "Ok", Toast.LENGTH_SHORT).show()
+            navigation.popBackStack()
         }
         return view
     }
