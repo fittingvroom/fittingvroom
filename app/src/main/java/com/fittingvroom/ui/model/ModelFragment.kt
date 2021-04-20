@@ -20,9 +20,10 @@ class ModelFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        initViewModel()
         viewBinding = FragmentModelBinding.inflate(inflater, container, false)
-        return viewBinding?.root
+        val view = viewBinding?.root
+        initViewModel()
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,6 +42,7 @@ class ModelFragment : Fragment() {
         binding.modelToolbar.setNavigationIcon(R.drawable.ic_toolbar_back_btn)
         binding.modelToolbar.setNavigationOnClickListener {
             Toast.makeText(requireContext(), "Возврат к предыдущему фрагменту", Toast.LENGTH_SHORT).show()
+            modelViewModel.backClick()
         }
     }
 
@@ -48,12 +50,15 @@ class ModelFragment : Fragment() {
         val binding = viewBinding ?: return
         binding.modelBottomButton.setOnClickListener {
             Toast.makeText(requireContext(), "К окну добавления параметров", Toast.LENGTH_SHORT).show()
+            modelViewModel.toParametersScreen()
         }
         binding.mannequinHelpImageBtn.setOnClickListener {
             Toast.makeText(requireContext(), "К окну помощи", Toast.LENGTH_SHORT).show()
+            modelViewModel.toHelpScreen()
         }
         binding.mannequinShareImageBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Поделиться", Toast.LENGTH_SHORT).show()
+            modelViewModel.shareClick()
         }
     }
 
