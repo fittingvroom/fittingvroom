@@ -14,12 +14,19 @@
     </style>
 
     <style name="BottomButtonTheme" parent="Theme.MyApplication">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/standard_text_size</item>
         <item name="android:textColor">@color/bottom_btn_text</item>
         <item name="textAllCaps">false</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:insetTop">0dp</item>
-        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetTop">@dimen/bottom_button_insets</item>
+        <item name="android:insetBottom">@dimen/bottom_button_insets</item>
         <item name="backgroundTint">@color/bottom_btn_bgrnd_tint</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="Theme.MyApplication">
+        <item name="android:textSize">@dimen/standard_text_size</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="background">@color/white</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 </resources>

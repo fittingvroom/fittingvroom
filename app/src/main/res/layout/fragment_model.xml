@@ -4,19 +4,84 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
+    android:background="@drawable/model_background_gradient_shape"
     tools:context=".ui.model.ModelFragment">
 
-    <TextView
-        android:id="@+id/text_model"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/model_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/toolbar_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/ToolbarTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/model_toolbar_title" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/model_image_view_mannequin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent_background"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:scaleX="0.75"
+        android:scaleY="0.75"
+        android:src="@drawable/mannequin"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/model_guideline"
+        app:layout_constraintStart_toStartOf="@id/model_guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="ContentDescription" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/mannequin_help_image_btn"
+        android:layout_width="@dimen/mannequin_help_image_width"
+        android:layout_height="@dimen/mannequin_help_image_height"
+        android:layout_marginTop="@dimen/mannequin_help_image_margin_top"
+        android:layout_marginEnd="@dimen/mannequin_help_image_margin_end"
+        android:background="@color/transparent_background"
+        android:src="@drawable/ic_help_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/model_toolbar" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/mannequin_share_image_btn"
+        android:layout_width="@dimen/mannequin_share_image_width"
+        android:layout_height="@dimen/mannequin_share_image_height"
+        android:layout_marginTop="@dimen/mannequin_share_image_margin_top"
+        android:layout_marginEnd="@dimen/mannequin_share_image_margin_end"
+        android:background="@color/transparent_background"
+        android:src="@drawable/ic_shared_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mannequin_help_image_btn" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/BottomButtonTheme"
+        android:id="@+id/model_bottom_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/model_screen_bottom_btn_text"
+        android:drawableStart="@drawable/ic_toolbar_back_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/model_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
