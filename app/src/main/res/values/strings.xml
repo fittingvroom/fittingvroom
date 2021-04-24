@@ -4,6 +4,7 @@
     <string name="title_favorites">Favorites</string>
     <string name="title_cart">Cart</string>
     <string name="title_fitting">Fitting</string>
+
     <string name="help_text">
         "Для того, чтобы виртуальный манекен максимально"
         "точно повторял ваши индивидуальные особенности фигуры,"
@@ -30,9 +31,16 @@
     <string name="_6_">6</string>
     <string name="ok">Ok</string>
 
+<!--    Home screen-->
     <string name="home_page_bottom_btn_text">Создать манекен</string>
     <string name="home_page_description_first_line">Вы поймете, что вам действительно подходит</string>
     <string name="home_page_description_second_line">не выходя из приложения</string>
+
+<!--    Model creation screen-->
     <string name="model_screen_bottom_btn_text">Добавить параметры</string>
     <string name="model_toolbar_title">Создать модель</string>
+
+<!--    Model parameters screen-->
+    <string name="genfer_list_female">Женский</string>
+    <string name="genfer_list_male">Мужской</string>
 </resources>

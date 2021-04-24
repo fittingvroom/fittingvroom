@@ -34,8 +34,8 @@ class ModelParametersFragment() : Fragment() {
     }
 
     private fun initGenderTextView() {
-        val array = resources.getStringArray(R.array.gender_list)
-        val items = mutableListOf(array)
+        val items = listOf(
+            getString(R.string.genfer_list_female), getString(R.string.genfer_list_male))
         val adapter = ArrayAdapter(requireContext(), R.layout.gender_list_item, items)
         (viewBinding?.genderTextView as? AutoCompleteTextView)?.setAdapter(adapter)
     }
