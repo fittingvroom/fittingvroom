@@ -50,7 +50,7 @@ class ModelFragment : Fragment() {
     private fun setBtnListeners() {
         val binding = viewBinding ?: return
         binding.modelBottomButton.setOnClickListener {
-            Toast.makeText(requireContext(), "К окну добавления параметров", Toast.LENGTH_SHORT).show()
+            navigation.navigate(R.id.action_navigation_model_to_modelParametersFragment)
         }
         binding.mannequinHelpImageBtn.setOnClickListener {
             navigation.navigate(R.id.action_navigation_model_to_help_fragment)

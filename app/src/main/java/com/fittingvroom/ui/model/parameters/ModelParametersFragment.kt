@@ -13,9 +13,8 @@ import com.fittingvroom.R
 import com.fittingvroom.databinding.FragmentModelParametersBinding
 
 class ModelParametersFragment() : Fragment() {
-    init {
-        val modelParameters = SharedPreferencesImplementation(requireContext())
-    }
+
+    private val modelParameters by lazy { SharedPreferencesImplementation(requireContext()) }
 
     private lateinit var modelParametersViewModel: ModelParametersViewModel
     private var viewBinding: FragmentModelParametersBinding? = null
