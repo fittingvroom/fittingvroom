@@ -43,4 +43,14 @@
 <!--    Model parameters screen-->
     <string name="genfer_list_female">Женский</string>
     <string name="genfer_list_male">Мужской</string>
+    <string name="parameter_gender_title">Пол</string>
+    <string name="parameter_height_title">Рост</string>
+    <string name="parameter_chest_girth_title">Обхват груди</string>
+    <string name="parameter_waist_girth_title">Обхват талии</string>
+    <string name="parameter_hips_girth_title">Обхват бедер</string>
+    <string name="parameter_chest_width_title">Ширина груди</string>
+    <string name="parameter_back_width_title">Ширина спины</string>
+    <string name="parameter_save_btn">Сохранить</string>
+    <string name="parameter_continue_btn">Продолжить</string>
+
 </resources>

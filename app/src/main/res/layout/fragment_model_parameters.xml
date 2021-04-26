@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="?attr/actionBarSize"
+    android:background="@color/model_parameters_background"
     tools:context="com.fittingvroom.ui.model.parameters.ModelParametersFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -26,10 +27,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/model_parameters_disabled_button"
-        style="@style/BottomButtonTheme"
+        style="@style/BottomButtonTheme.Dark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_toolbar_back_btn"
         android:enabled="false"
         android:text="@string/model_screen_bottom_btn_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,21 +37,22 @@
         app:layout_constraintTop_toBottomOf="@+id/model_parameters_toolbar" />
 
     <TextView
-        android:id="@+id/param1_title"
+        android:id="@+id/param_gender_title"
+        style="@style/ModelParameterTitleTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Пол"
-        android:textColor="#FF222222"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/param1_layout"
+        android:text="@string/parameter_gender_title"
+        app:layout_constraintBottom_toBottomOf="@+id/param_gender_layout"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/param1_layout" />
+        app:layout_constraintTop_toTopOf="@+id/param_gender_layout" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/param1_layout"
+        android:id="@+id/param_gender_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/model_parameter_ti_layout_margin_top"
+        app:boxStrokeColor="@color/model_parameter_ti_layout_box_stroke"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toEndOf="@+id/guideline7"
         app:layout_constraintTop_toBottomOf="@+id/model_parameters_disabled_button"
@@ -62,8 +63,210 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            />
+            tools:ignore="LabelFor" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/param_height_title"
+        style="@style/ModelParameterTitleTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parameter_height_title"
+        app:layout_constraintBottom_toBottomOf="@+id/param_height_layout"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/param_height_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/param_height_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/model_parameter_ti_layout_margin_top"
+        app:boxStrokeColor="@color/model_parameter_ti_layout_box_stroke"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toEndOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/param_gender_layout"
+        tools:ignore="ExtraText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/heigth_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/param_chest_girth_title"
+        style="@style/ModelParameterTitleTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parameter_chest_girth_title"
+        app:layout_constraintBottom_toBottomOf="@+id/param_chest_girth_layout"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/param_chest_girth_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/param_chest_girth_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/model_parameter_ti_layout_margin_top"
+        app:boxStrokeColor="@color/model_parameter_ti_layout_box_stroke"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toEndOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/param_height_layout"
+        tools:ignore="ExtraText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/param_chest_girth_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/param_waist_girth_title"
+        style="@style/ModelParameterTitleTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parameter_waist_girth_title"
+        app:layout_constraintBottom_toBottomOf="@+id/param_waist_girth_layout"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/param_waist_girth_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/param_waist_girth_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/model_parameter_ti_layout_margin_top"
+        app:boxStrokeColor="@color/model_parameter_ti_layout_box_stroke"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toEndOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/param_chest_girth_layout"
+        tools:ignore="ExtraText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/param_waist_girth_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/param_hips_girth_title"
+        style="@style/ModelParameterTitleTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parameter_hips_girth_title"
+        app:layout_constraintBottom_toBottomOf="@+id/param_hips_girth_layout"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/param_hips_girth_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/param_hips_girth_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/model_parameter_ti_layout_margin_top"
+        app:boxStrokeColor="@color/model_parameter_ti_layout_box_stroke"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toEndOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/param_waist_girth_layout"
+        tools:ignore="ExtraText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/param_hips_girth_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/param_chest_width_title"
+        style="@style/ModelParameterTitleTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parameter_chest_width_title"
+        app:layout_constraintBottom_toBottomOf="@+id/param_chest_width_layout"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/param_chest_width_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/param_chest_width_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/model_parameter_ti_layout_margin_top"
+        app:boxStrokeColor="@color/model_parameter_ti_layout_box_stroke"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toEndOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/param_hips_girth_layout"
+        tools:ignore="ExtraText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/param_chest_width_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/param_back_width_title"
+        style="@style/ModelParameterTitleTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/parameter_back_width_title"
+        app:layout_constraintBottom_toBottomOf="@+id/param_back_width_layout"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toTopOf="@+id/param_back_width_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/param_back_width_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/model_parameter_ti_layout_margin_top"
+        app:boxStrokeColor="@color/model_parameter_ti_layout_box_stroke"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toEndOf="@+id/guideline7"
+        app:layout_constraintTop_toBottomOf="@+id/param_chest_width_layout"
+        tools:ignore="ExtraText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/param_back_width_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/model_parameters_save_button"
+        style="@style/BottomButtonTheme.Light"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/parameters_btn_horizontal_margin"
+        android:text="@string/parameter_save_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/model_parameters_continue_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/model_parameters_continue_button"
+        style="@style/BottomButtonTheme.Dark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/parameters_btn_horizontal_margin"
+        android:text="@string/parameter_continue_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/model_parameters_save_button" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
