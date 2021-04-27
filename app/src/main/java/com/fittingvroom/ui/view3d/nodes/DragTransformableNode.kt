@@ -1,4 +1,5 @@
-package com.fittingvroom.ui.fitting.nodes
+package com.fittingvroom.ui.view3d.nodes
+
 import com.google.ar.sceneform.ux.TransformableNode
 import com.google.ar.sceneform.ux.TransformationSystem
 

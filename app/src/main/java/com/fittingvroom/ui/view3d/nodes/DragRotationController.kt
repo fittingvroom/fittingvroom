@@ -1,4 +1,4 @@
-package com.fittingvroom.ui.fitting.nodes
+package com.fittingvroom.ui.view3d.nodes
 
 import android.os.Handler
 import com.google.ar.sceneform.Node
