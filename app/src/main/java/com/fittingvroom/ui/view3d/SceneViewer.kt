@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.res.Resources
 import android.net.Uri
 import android.view.MotionEvent
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.fittingvroom.ui.view3d.nodes.DragTransformableNode
 import com.google.ar.sceneform.HitTestResult
@@ -18,8 +20,11 @@ val MODEL_URI = "https://github.com/shindje/model/blob/master/model(server_teleg
 class SceneViewer {
     companion object {
         @JvmStatic
-        fun showScene(context: Context?, resources: Resources, sceneView: SceneView?) {
-            Toast.makeText(context, "Loading model...", Toast.LENGTH_SHORT).show()
+        fun showScene(context: Context?, resources: Resources, sceneView: SceneView?, progressBar: ProgressBar?) {
+            if (progressBar != null)
+                progressBar.visibility = View.VISIBLE
+            else
+                Toast.makeText(context, "Loading model...", Toast.LENGTH_SHORT).show()
 
             val source = RenderableSource.builder().setSource(
                     context,
@@ -35,11 +40,17 @@ class SceneViewer {
                     .setRegistryId(MODEL_URI)
                     .build()
                     .thenAccept { renderable: ModelRenderable ->
-                        Toast.makeText(context, "Model loaded", Toast.LENGTH_SHORT).show()
+                        if (progressBar != null)
+                            progressBar.visibility = View.GONE
+                        else
+                            Toast.makeText(context, "Model loaded", Toast.LENGTH_SHORT).show()
                         addNodeToScene(renderable, sceneView, resources)
                     }
                     .exceptionally { throwable: Throwable? ->
-                        Toast.makeText(context, "Unable to load model: ${throwable?.message}", Toast.LENGTH_LONG).show()
+                        if (progressBar != null)
+                            progressBar.visibility = View.GONE
+                        else
+                            Toast.makeText(context, "Unable to load model: ${throwable?.message}", Toast.LENGTH_LONG).show()
                         null
                     }
         }

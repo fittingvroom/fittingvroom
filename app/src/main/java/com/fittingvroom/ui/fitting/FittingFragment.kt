@@ -20,7 +20,7 @@ class FittingFragment : Fragment() {
     ): View? {
         binding = FragmentFittingBinding.inflate(inflater, container, false)
         val view = binding?.root
-        SceneViewer.showScene(context, resources, binding?.fittingSceneView)
+        SceneViewer.showScene(context, resources, binding?.fittingSceneView, binding?.fittingPb)
         return view
     }
 
