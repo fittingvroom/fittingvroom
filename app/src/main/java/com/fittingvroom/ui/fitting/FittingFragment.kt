@@ -4,28 +4,39 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.fittingvroom.R
+import com.fittingvroom.databinding.FragmentFittingBinding
+import com.fittingvroom.ui.view3d.SceneViewer
+
 
 class FittingFragment : Fragment() {
 
-    private lateinit var fittingViewModel: FittingViewModel
+    private var binding: FragmentFittingBinding? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        fittingViewModel =
-                ViewModelProvider(this).get(FittingViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_favorites, container, false)
-        val textView: TextView = root.findViewById(R.id.text_favorites)
-        fittingViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        binding = FragmentFittingBinding.inflate(inflater, container, false)
+        val view = binding?.root
+        SceneViewer.showScene(context, resources, binding?.fittingSceneView, binding?.fittingPb)
+        return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding?.fittingSceneView?.resume()
+    }
+
+
+    override fun onPause() {
+        super.onPause()
+        binding?.fittingSceneView?.pause()
+    }
+
+    override fun onDestroy() {
+        binding = null
+        super.onDestroy()
     }
 }
