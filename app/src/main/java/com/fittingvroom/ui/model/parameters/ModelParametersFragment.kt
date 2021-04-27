@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
 import com.fittingvroom.databinding.FragmentModelParametersBinding
+import com.fittingvroom.utils.*
 
 class ModelParametersFragment() : Fragment() {
 
@@ -31,13 +31,25 @@ class ModelParametersFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initToolbarNavigation()
         initGenderTextView()
+        addDecimalLimiter()
+    }
+
+    private fun addDecimalLimiter() {
+        val binding = viewBinding ?: return
+        binding.paramHeigthView.addDecimalLimiter()
+        binding.paramChestGirthView.addDecimalLimiter()
+        binding.paramHipsGirthView.addDecimalLimiter()
+        binding.paramWaistGirthView.addDecimalLimiter()
+        binding.paramChestWidthView.addDecimalLimiter()
+        binding.paramBackWidthView.addDecimalLimiter()
     }
 
     private fun initGenderTextView() {
         val items = listOf(
-            getString(R.string.genfer_list_female), getString(R.string.genfer_list_male))
+            getString(R.string.genfer_list_female),
+            getString(R.string.genfer_list_male))
         val adapter = ArrayAdapter(requireContext(), R.layout.gender_list_item, items)
-        (viewBinding?.genderTextView as? AutoCompleteTextView)?.setAdapter(adapter)
+        viewBinding?.genderTextView?.setAdapter(adapter)
     }
 
     private fun initViewModel() {
