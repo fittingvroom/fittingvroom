@@ -1,7 +1,6 @@
 package com.fittingvroom.data
 
-data class ModelPreferences(
-        val isSaved : Boolean = false,
+data class ModelParametersData(
         val gender : String? = "",
         val height : String? = "",
         val chestGirth : String? = "",

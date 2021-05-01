@@ -1,7 +1,7 @@
 package com.fittingvroom.ui.model.parameters
 
 import android.content.Context
-import com.fittingvroom.data.ModelPreferences
+import com.fittingvroom.data.ModelParametersData
 
 class SharedPreferencesImplementation(private val context: Context) : SaveModelParameters {
 
@@ -17,34 +17,34 @@ class SharedPreferencesImplementation(private val context: Context) : SaveModelP
         const val MODEL_PREFERENCES_CHEST_WIDTH = "com.fittingvroom.ui.model.parameters.sp_parameters_file.CHEST_WIDTH" //ширина груди
         const val MODEL_PREFERENCES_BACK_WIDTH = "com.fittingvroom.ui.model.parameters.sp_parameters_file.BACK_WIDTH" //ширина спины
     }
-
         private val modelSharedPref = context.getSharedPreferences(MODEL_PREFERENCES, Context.MODE_PRIVATE)
         private val editor = modelSharedPref.edit()
 
-    override suspend fun putParameters(modelPreferences: ModelPreferences, allParmetersOk : Boolean) {
+    override fun putParameters(modelParametersData: ModelParametersData, allParmetersOk: Boolean) {
         editor.putBoolean(MODEL_PREFERENCES_IS_SAVED, allParmetersOk)
-        editor.putString(MODEL_PREFERENCES_GENDER, modelPreferences.gender)
-        editor.putString(MODEL_PREFERENCES_HEIGHT, modelPreferences.height)
-        editor.putString(MODEL_PREFERENCES_CHEST_GIRTH, modelPreferences.chestGirth)
-        editor.putString(MODEL_PREFERENCES_WAIST_GIRTH, modelPreferences.waistGirth)
-        editor.putString(MODEL_PREFERENCES_HIPS_GIRTH, modelPreferences.hipsGirth)
-        editor.putString(MODEL_PREFERENCES_CHEST_WIDTH, modelPreferences.chestWidth)
-        editor.putString(MODEL_PREFERENCES_BACK_WIDTH, modelPreferences.backWidth)
+        if (allParmetersOk) {
+            editor.putString(MODEL_PREFERENCES_GENDER, modelParametersData.gender)
+            editor.putString(MODEL_PREFERENCES_HEIGHT, modelParametersData.height)
+            editor.putString(MODEL_PREFERENCES_CHEST_GIRTH, modelParametersData.chestGirth)
+            editor.putString(MODEL_PREFERENCES_WAIST_GIRTH, modelParametersData.waistGirth)
+            editor.putString(MODEL_PREFERENCES_HIPS_GIRTH, modelParametersData.hipsGirth)
+            editor.putString(MODEL_PREFERENCES_CHEST_WIDTH, modelParametersData.chestWidth)
+            editor.putString(MODEL_PREFERENCES_BACK_WIDTH, modelParametersData.backWidth)
+        }
         editor.apply()
     }
 
-    override suspend fun getParameters(): ModelPreferences {
-        var result = ModelPreferences()
+    override fun getParameters(): ModelParametersData {
+        var result = ModelParametersData()
         if (modelSharedPref.contains(MODEL_PREFERENCES_IS_SAVED) && modelSharedPref.getBoolean(MODEL_PREFERENCES_IS_SAVED, false)) {
-            result = ModelPreferences (
-                    isSaved = modelSharedPref.getBoolean(MODEL_PREFERENCES_IS_SAVED, false),
-                    gender = modelSharedPref.getString(MODEL_PREFERENCES_GENDER, "Female"),
-                    height = modelSharedPref.getString(MODEL_PREFERENCES_HEIGHT, ""),
-                    chestGirth = modelSharedPref.getString(MODEL_PREFERENCES_CHEST_GIRTH,  ""),
-                    waistGirth = modelSharedPref.getString(MODEL_PREFERENCES_WAIST_GIRTH, ""),
-                    hipsGirth = modelSharedPref.getString(MODEL_PREFERENCES_HIPS_GIRTH, ""),
-                    chestWidth = modelSharedPref.getString(MODEL_PREFERENCES_CHEST_WIDTH, ""),
-                    backWidth = modelSharedPref.getString(MODEL_PREFERENCES_BACK_WIDTH, "")
+            result = ModelParametersData(
+                gender = modelSharedPref.getString(MODEL_PREFERENCES_GENDER, ""),
+                height = modelSharedPref.getString(MODEL_PREFERENCES_HEIGHT, ""),
+                chestGirth = modelSharedPref.getString(MODEL_PREFERENCES_CHEST_GIRTH,  ""),
+                waistGirth = modelSharedPref.getString(MODEL_PREFERENCES_WAIST_GIRTH, ""),
+                hipsGirth = modelSharedPref.getString(MODEL_PREFERENCES_HIPS_GIRTH, ""),
+                chestWidth = modelSharedPref.getString(MODEL_PREFERENCES_CHEST_WIDTH, ""),
+                backWidth = modelSharedPref.getString(MODEL_PREFERENCES_BACK_WIDTH, "")
             )
         }
         return result

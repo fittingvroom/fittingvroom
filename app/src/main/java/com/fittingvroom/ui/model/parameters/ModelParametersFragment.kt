@@ -1,22 +1,22 @@
 package com.fittingvroom.ui.model.parameters
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
+import com.fittingvroom.data.ModelParametersData
 import com.fittingvroom.databinding.FragmentModelParametersBinding
 import com.fittingvroom.utils.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class ModelParametersFragment() : Fragment() {
+class ModelParametersFragment : Fragment() {
 
-    private val modelParameters by lazy { SharedPreferencesImplementation(requireContext()) }
-
-    private lateinit var modelParametersViewModel: ModelParametersViewModel
+    lateinit var modelParametersViewModel: ModelParametersViewModel
     private var viewBinding: FragmentModelParametersBinding? = null
     private val navigation by lazy { findNavController() }
 
@@ -32,6 +32,7 @@ class ModelParametersFragment() : Fragment() {
         initToolbarNavigation()
         initGenderTextView()
         addDecimalLimiter()
+        modelParametersViewModel.getData()
     }
 
     private fun addDecimalLimiter() {
@@ -53,7 +54,20 @@ class ModelParametersFragment() : Fragment() {
     }
 
     private fun initViewModel() {
-        modelParametersViewModel = ViewModelProvider(this).get(ModelParametersViewModel::class.java)
+        val viewModel: ModelParametersViewModel by viewModel()
+        modelParametersViewModel = viewModel
+        modelParametersViewModel.subscribe()
+            .observe(viewLifecycleOwner , { renderData(it) })
+    }
+
+    private fun renderData(parametersData: ModelParametersData) {
+        val binding = viewBinding ?: return
+        binding.paramHeigthView.text = parametersData.height as Editable
+        binding.paramChestGirthView.text = parametersData.chestGirth as Editable
+        binding.paramHipsGirthView.text = parametersData.hipsGirth as Editable
+        binding.paramWaistGirthView.text = parametersData.waistGirth as Editable
+        binding.paramChestWidthView.text = parametersData.chestWidth as Editable
+        binding.paramBackWidthView.text = parametersData.backWidth as Editable
     }
 
     private fun initToolbarNavigation() {

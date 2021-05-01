@@ -1,7 +1,7 @@
 package com.fittingvroom.ui.model.parameters
 
-import com.fittingvroom.data.ModelPreferences
+import com.fittingvroom.data.ModelParametersData
 
 interface SaveModelParameters : ModelParameters {
-    suspend fun putParameters(modelPreferences: ModelPreferences, allParmetersOk : Boolean)
+    fun putParameters(modelParametersData: ModelParametersData, allParmetersOk : Boolean)
 }
