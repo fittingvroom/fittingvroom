@@ -7,7 +7,7 @@ import com.fittingvroom.data.ModelParametersData
 import kotlinx.coroutines.*
 
 class ModelParametersViewModel(
-    private val parameters: SharedPreferencesImplementation
+    private val parameters: SaveModelParameters
 ) : ViewModel() {
 
     private val _mutableLiveData = MutableLiveData<ModelParametersData>()
@@ -23,7 +23,7 @@ class ModelParametersViewModel(
     }
 
     private fun startInteractor(parameters: ModelParametersData) {
-        _mutableLiveData.value = parameters
+        _mutableLiveData.postValue(parameters)
     }
 
     private val viewModelCoroutineScope = CoroutineScope(
@@ -44,5 +44,19 @@ class ModelParametersViewModel(
 
     private fun handleError(error: Throwable) {
 
+    }
+
+    fun saveParameters(modelParametersData: ModelParametersData) : Boolean{
+        return parameters.putParameters(modelParametersData, dataIsNotEmpty(modelParametersData))
+    }
+
+    private fun dataIsNotEmpty(saveData: ModelParametersData): Boolean {
+        return !(saveData.gender == null || saveData.gender == ""
+                || saveData.height == null || saveData.height == ""
+                || saveData.chestGirth == null || saveData.chestGirth == ""
+                || saveData.waistGirth == null || saveData.waistGirth == ""
+                || saveData.hipsGirth == null || saveData.hipsGirth == ""
+                || saveData.chestWidth == null || saveData.chestWidth == ""
+                || saveData.backWidth == null || saveData.backWidth == "")
     }
 }

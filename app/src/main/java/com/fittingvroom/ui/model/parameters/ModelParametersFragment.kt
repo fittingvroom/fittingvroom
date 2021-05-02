@@ -1,11 +1,11 @@
 package com.fittingvroom.ui.model.parameters
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
@@ -20,7 +20,11 @@ class ModelParametersFragment : Fragment() {
     private var viewBinding: FragmentModelParametersBinding? = null
     private val navigation by lazy { findNavController() }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         viewBinding = FragmentModelParametersBinding.inflate(inflater, container, false)
         val view = viewBinding?.root
         initViewModel()
@@ -30,12 +34,13 @@ class ModelParametersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbarNavigation()
+        setBtnListeners()
         initGenderTextView()
-        addDecimalLimiter()
+        decimalLimiter()
         modelParametersViewModel.getData()
     }
 
-    private fun addDecimalLimiter() {
+    private fun decimalLimiter() {
         val binding = viewBinding ?: return
         binding.paramHeigthView.addDecimalLimiter()
         binding.paramChestGirthView.addDecimalLimiter()
@@ -47,8 +52,9 @@ class ModelParametersFragment : Fragment() {
 
     private fun initGenderTextView() {
         val items = listOf(
-            getString(R.string.genfer_list_female),
-            getString(R.string.genfer_list_male))
+            getString(R.string.gender_list_female),
+            getString(R.string.gender_list_male)
+        )
         val adapter = ArrayAdapter(requireContext(), R.layout.gender_list_item, items)
         viewBinding?.genderTextView?.setAdapter(adapter)
     }
@@ -57,17 +63,19 @@ class ModelParametersFragment : Fragment() {
         val viewModel: ModelParametersViewModel by viewModel()
         modelParametersViewModel = viewModel
         modelParametersViewModel.subscribe()
-            .observe(viewLifecycleOwner , { renderData(it) })
+            .observe(viewLifecycleOwner, { renderData(it) })
     }
 
     private fun renderData(parametersData: ModelParametersData) {
         val binding = viewBinding ?: return
-        binding.paramHeigthView.text = parametersData.height as Editable
-        binding.paramChestGirthView.text = parametersData.chestGirth as Editable
-        binding.paramHipsGirthView.text = parametersData.hipsGirth as Editable
-        binding.paramWaistGirthView.text = parametersData.waistGirth as Editable
-        binding.paramChestWidthView.text = parametersData.chestWidth as Editable
-        binding.paramBackWidthView.text = parametersData.backWidth as Editable
+        binding.genderTextView.setText(parametersData.gender)
+        binding.paramHeigthView.setText(parametersData.height)
+        binding.paramChestGirthView.setText(parametersData.chestGirth)
+        binding.paramHipsGirthView.setText(parametersData.hipsGirth)
+        binding.paramWaistGirthView.setText(parametersData.waistGirth)
+        binding.paramChestWidthView.setText(parametersData.chestWidth)
+        binding.paramBackWidthView.setText(parametersData.backWidth)
+        initGenderTextView()
     }
 
     private fun initToolbarNavigation() {
@@ -78,8 +86,33 @@ class ModelParametersFragment : Fragment() {
         }
     }
 
+    fun setBtnListeners() {
+        val binding = viewBinding ?: return
+        binding.modelParametersSaveButton.setOnClickListener {
+            if (modelParametersViewModel.saveParameters(
+                    ModelParametersData(
+                        false,
+                        binding.genderTextView.text.toString(),
+                        binding.paramHeigthView.text.toString(),
+                        binding.paramChestGirthView.text.toString(),
+                        binding.paramHipsGirthView.text.toString(),
+                        binding.paramWaistGirthView.text.toString(),
+                        binding.paramChestWidthView.text.toString(),
+                        binding.paramBackWidthView.text.toString()
+                    )
+                )
+            ) {
+                navigation.popBackStack(R.id.navigation_home, false)
+                navigation.navigate(R.id.navigation_model)
+            } else {
+                Toast.makeText(requireContext(), "Введите все параметры!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         viewBinding = null
     }
 }
+

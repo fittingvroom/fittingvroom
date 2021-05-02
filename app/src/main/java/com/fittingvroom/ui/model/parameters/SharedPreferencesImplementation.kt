@@ -1,6 +1,7 @@
 package com.fittingvroom.ui.model.parameters
 
 import android.content.Context
+import android.text.Editable
 import com.fittingvroom.data.ModelParametersData
 
 class SharedPreferencesImplementation(private val context: Context) : SaveModelParameters {
@@ -20,7 +21,7 @@ class SharedPreferencesImplementation(private val context: Context) : SaveModelP
         private val modelSharedPref = context.getSharedPreferences(MODEL_PREFERENCES, Context.MODE_PRIVATE)
         private val editor = modelSharedPref.edit()
 
-    override fun putParameters(modelParametersData: ModelParametersData, allParmetersOk: Boolean) {
+    override fun putParameters(modelParametersData: ModelParametersData, allParmetersOk: Boolean): Boolean {
         editor.putBoolean(MODEL_PREFERENCES_IS_SAVED, allParmetersOk)
         if (allParmetersOk) {
             editor.putString(MODEL_PREFERENCES_GENDER, modelParametersData.gender)
@@ -32,13 +33,17 @@ class SharedPreferencesImplementation(private val context: Context) : SaveModelP
             editor.putString(MODEL_PREFERENCES_BACK_WIDTH, modelParametersData.backWidth)
         }
         editor.apply()
+        return allParmetersOk
     }
 
-    override fun getParameters(): ModelParametersData {
+    override suspend fun getParameters(): ModelParametersData {
         var result = ModelParametersData()
+        println( "isSavedContains = ${modelSharedPref.contains(MODEL_PREFERENCES_IS_SAVED)}")
+        println( "isSaved = ${modelSharedPref.getBoolean(MODEL_PREFERENCES_IS_SAVED, false)}")
         if (modelSharedPref.contains(MODEL_PREFERENCES_IS_SAVED) && modelSharedPref.getBoolean(MODEL_PREFERENCES_IS_SAVED, false)) {
             result = ModelParametersData(
-                gender = modelSharedPref.getString(MODEL_PREFERENCES_GENDER, ""),
+                isSaved = true,
+                gender = modelSharedPref.getString(MODEL_PREFERENCES_GENDER, "Женский"),
                 height = modelSharedPref.getString(MODEL_PREFERENCES_HEIGHT, ""),
                 chestGirth = modelSharedPref.getString(MODEL_PREFERENCES_CHEST_GIRTH,  ""),
                 waistGirth = modelSharedPref.getString(MODEL_PREFERENCES_WAIST_GIRTH, ""),
