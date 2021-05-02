@@ -89,25 +89,37 @@ class ModelParametersFragment : Fragment() {
     fun setBtnListeners() {
         val binding = viewBinding ?: return
         binding.modelParametersSaveButton.setOnClickListener {
-            if (modelParametersViewModel.saveParameters(
-                    ModelParametersData(
-                        false,
-                        binding.genderTextView.text.toString(),
-                        binding.paramHeigthView.text.toString(),
-                        binding.paramChestGirthView.text.toString(),
-                        binding.paramHipsGirthView.text.toString(),
-                        binding.paramWaistGirthView.text.toString(),
-                        binding.paramChestWidthView.text.toString(),
-                        binding.paramBackWidthView.text.toString()
-                    )
-                )
-            ) {
+            if (saveParameters()) {
                 navigation.popBackStack(R.id.navigation_home, false)
                 navigation.navigate(R.id.navigation_model)
             } else {
                 Toast.makeText(requireContext(), "Введите все параметры!", Toast.LENGTH_SHORT).show()
             }
         }
+        binding.modelParametersContinueButton.setOnClickListener {
+            if (saveParameters()) {
+                navigation.popBackStack(R.id.navigation_model, false)
+                navigation.navigate(R.id.navigation_fitting)
+            } else {
+                Toast.makeText(requireContext(), "Введите все параметры!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    fun saveParameters() : Boolean {
+        val binding = viewBinding ?: return false
+        return modelParametersViewModel.saveParameters(
+            ModelParametersData(
+                false,
+                binding.genderTextView.text.toString(),
+                binding.paramHeigthView.text.toString(),
+                binding.paramChestGirthView.text.toString(),
+                binding.paramHipsGirthView.text.toString(),
+                binding.paramWaistGirthView.text.toString(),
+                binding.paramChestWidthView.text.toString(),
+                binding.paramBackWidthView.text.toString()
+            )
+        )
     }
 
     override fun onDestroy() {
