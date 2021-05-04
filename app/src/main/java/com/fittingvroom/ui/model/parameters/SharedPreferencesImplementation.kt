@@ -38,8 +38,6 @@ class SharedPreferencesImplementation(private val context: Context) : SaveModelP
 
     override suspend fun getParameters(): ModelParametersData {
         var result = ModelParametersData()
-        println( "isSavedContains = ${modelSharedPref.contains(MODEL_PREFERENCES_IS_SAVED)}")
-        println( "isSaved = ${modelSharedPref.getBoolean(MODEL_PREFERENCES_IS_SAVED, false)}")
         if (modelSharedPref.contains(MODEL_PREFERENCES_IS_SAVED) && modelSharedPref.getBoolean(MODEL_PREFERENCES_IS_SAVED, false)) {
             result = ModelParametersData(
                 isSaved = true,
