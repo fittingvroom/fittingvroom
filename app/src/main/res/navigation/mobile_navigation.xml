@@ -31,6 +31,9 @@
             android:id="@+id/action_navigation_model_to_help_fragment"
             app:destination="@id/help_fragment"
             app:popUpTo="@id/navigation_model" />
+        <action
+            android:id="@+id/action_navigation_model_to_modelParametersFragment"
+            app:destination="@id/modelParametersFragment" />
     </fragment>
 
     <fragment
@@ -52,4 +55,9 @@
         android:name="com.fittingvroom.ui.help.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/modelParametersFragment"
+        android:name="com.fittingvroom.ui.model.parameters.ModelParametersFragment"
+        android:label="fragment_model_parameters"
+        tools:layout="@layout/fragment_model_parameters" />
 </navigation>

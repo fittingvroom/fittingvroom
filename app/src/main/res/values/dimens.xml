@@ -5,4 +5,5 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="standard_text_size">20sp</dimen>
     <dimen name="bottom_button_insets">0dp</dimen>
+    <dimen name="parameters_btn_horizontal_margin">12dp</dimen>
 </resources>
