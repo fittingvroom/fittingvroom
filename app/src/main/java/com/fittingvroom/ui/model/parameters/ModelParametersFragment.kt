@@ -6,17 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
 import com.fittingvroom.data.ModelParametersData
 import com.fittingvroom.databinding.FragmentModelParametersBinding
+import com.fittingvroom.ui.base.BaseFragment
 import com.fittingvroom.utils.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ModelParametersFragment : Fragment() {
+class ModelParametersFragment : BaseFragment<ModelParametersData>() {
 
-    lateinit var modelParametersViewModel: ModelParametersViewModel
+    override lateinit var model: ModelParametersViewModel
     private var viewBinding: FragmentModelParametersBinding? = null
     private val navigation by lazy { findNavController() }
 
@@ -37,7 +37,7 @@ class ModelParametersFragment : Fragment() {
         setBtnListeners()
         initGenderTextView()
         decimalLimiter()
-        modelParametersViewModel.getData()
+        model.getData()
     }
 
     private fun decimalLimiter() {
@@ -61,20 +61,20 @@ class ModelParametersFragment : Fragment() {
 
     private fun initViewModel() {
         val viewModel: ModelParametersViewModel by viewModel()
-        modelParametersViewModel = viewModel
-        modelParametersViewModel.subscribe()
+        model = viewModel
+        model.subscribe()
             .observe(viewLifecycleOwner, { renderData(it) })
     }
 
-    private fun renderData(parametersData: ModelParametersData) {
+    override fun renderData(state: ModelParametersData) {
         val binding = viewBinding ?: return
-        binding.genderTextView.setText(parametersData.gender)
-        binding.paramHeigthView.setText(parametersData.height)
-        binding.paramChestGirthView.setText(parametersData.chestGirth)
-        binding.paramHipsGirthView.setText(parametersData.hipsGirth)
-        binding.paramWaistGirthView.setText(parametersData.waistGirth)
-        binding.paramChestWidthView.setText(parametersData.chestWidth)
-        binding.paramBackWidthView.setText(parametersData.backWidth)
+        binding.genderTextView.setText(state.gender)
+        binding.paramHeigthView.setText(state.height)
+        binding.paramChestGirthView.setText(state.chestGirth)
+        binding.paramHipsGirthView.setText(state.hipsGirth)
+        binding.paramWaistGirthView.setText(state.waistGirth)
+        binding.paramChestWidthView.setText(state.chestWidth)
+        binding.paramBackWidthView.setText(state.backWidth)
         initGenderTextView()
     }
 
@@ -108,7 +108,7 @@ class ModelParametersFragment : Fragment() {
 
     fun saveParameters() : Boolean {
         val binding = viewBinding ?: return false
-        return modelParametersViewModel.saveParameters(
+        return model.saveParameters(
             ModelParametersData(
                 false,
                 binding.genderTextView.text.toString(),
