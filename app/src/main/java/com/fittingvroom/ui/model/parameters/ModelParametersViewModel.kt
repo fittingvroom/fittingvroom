@@ -31,8 +31,19 @@ class ModelParametersViewModel(
         cancelJob()
     }
 
-    fun saveParameters(modelParametersData: ModelParametersData) : Boolean{
-        return parameters.putParameters(modelParametersData, modelParametersData.isNotEmpty())
+    fun putData(modelParametersData: ModelParametersData) : Boolean {
+        if (modelParametersData.isNotEmpty()) {
+            viewModelCoroutineScope.launch {
+                saveParameters(modelParametersData)
+            }
+        }
+        return modelParametersData.isNotEmpty()
+    }
+
+    suspend fun saveParameters(modelParametersData: ModelParametersData) {
+        if (modelParametersData.isNotEmpty()) {
+            parameters.putParameters(modelParametersData, true)
+        }
     }
 
     override fun handleError(error: Throwable) {

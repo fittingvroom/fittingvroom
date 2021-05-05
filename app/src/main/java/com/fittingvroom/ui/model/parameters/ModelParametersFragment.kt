@@ -96,6 +96,7 @@ class ModelParametersFragment : BaseFragment<ModelParametersData>() {
                 Toast.makeText(requireContext(), getString(R.string.no_parameters_error), Toast.LENGTH_SHORT).show()
             }
         }
+
         binding.modelParametersContinueButton.setOnClickListener {
             if (saveParameters()) {
                 navigation.popBackStack(R.id.navigation_model, false)
@@ -108,7 +109,7 @@ class ModelParametersFragment : BaseFragment<ModelParametersData>() {
 
     fun saveParameters() : Boolean {
         val binding = viewBinding ?: return false
-        return model.saveParameters(
+        return model.putData(
             ModelParametersData(
                 false,
                 binding.genderTextView.text.toString(),

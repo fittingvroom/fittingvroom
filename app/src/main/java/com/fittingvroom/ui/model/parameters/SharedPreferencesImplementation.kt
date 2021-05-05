@@ -22,7 +22,7 @@ class SharedPreferencesImplementation(private val context: Context) : SaveModelP
         private val modelSharedPref = context.getSharedPreferences(MODEL_PREFERENCES, Context.MODE_PRIVATE)
         private val editor = modelSharedPref.edit()
 
-    override fun putParameters(modelParametersData: ModelParametersData, allParmetersOk: Boolean): Boolean {
+    override suspend fun putParameters(modelParametersData: ModelParametersData, allParmetersOk: Boolean): Boolean {
         if (allParmetersOk) {
             editor.putBoolean(MODEL_PREFERENCES_IS_SAVED, allParmetersOk)
             editor.putString(MODEL_PREFERENCES_GENDER, modelParametersData.gender)
