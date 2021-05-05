@@ -91,9 +91,9 @@ class ModelParametersFragment : Fragment() {
         binding.modelParametersSaveButton.setOnClickListener {
             if (saveParameters()) {
                 navigation.popBackStack(R.id.navigation_home, false)
-                navigation.navigate(R.id.navigation_model)
+                navigation.navigate(R.id.action_navigation_home_to_navigation_model)
             } else {
-                Toast.makeText(requireContext(), "Введите все параметры!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.no_parameters_error), Toast.LENGTH_SHORT).show()
             }
         }
         binding.modelParametersContinueButton.setOnClickListener {
@@ -101,7 +101,7 @@ class ModelParametersFragment : Fragment() {
                 navigation.popBackStack(R.id.navigation_model, false)
                 navigation.navigate(R.id.navigation_fitting)
             } else {
-                Toast.makeText(requireContext(), "Введите все параметры!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.no_parameters_error), Toast.LENGTH_SHORT).show()
             }
         }
     }

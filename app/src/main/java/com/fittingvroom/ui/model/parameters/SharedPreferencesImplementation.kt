@@ -1,7 +1,7 @@
 package com.fittingvroom.ui.model.parameters
 
 import android.content.Context
-import android.text.Editable
+import com.fittingvroom.R
 import com.fittingvroom.data.ModelParametersData
 
 class SharedPreferencesImplementation(private val context: Context) : SaveModelParameters {
@@ -18,12 +18,13 @@ class SharedPreferencesImplementation(private val context: Context) : SaveModelP
         const val MODEL_PREFERENCES_CHEST_WIDTH = "com.fittingvroom.ui.model.parameters.sp_parameters_file.CHEST_WIDTH" //ширина груди
         const val MODEL_PREFERENCES_BACK_WIDTH = "com.fittingvroom.ui.model.parameters.sp_parameters_file.BACK_WIDTH" //ширина спины
     }
+
         private val modelSharedPref = context.getSharedPreferences(MODEL_PREFERENCES, Context.MODE_PRIVATE)
         private val editor = modelSharedPref.edit()
 
     override fun putParameters(modelParametersData: ModelParametersData, allParmetersOk: Boolean): Boolean {
-        editor.putBoolean(MODEL_PREFERENCES_IS_SAVED, allParmetersOk)
         if (allParmetersOk) {
+            editor.putBoolean(MODEL_PREFERENCES_IS_SAVED, allParmetersOk)
             editor.putString(MODEL_PREFERENCES_GENDER, modelParametersData.gender)
             editor.putString(MODEL_PREFERENCES_HEIGHT, modelParametersData.height)
             editor.putString(MODEL_PREFERENCES_CHEST_GIRTH, modelParametersData.chestGirth)
@@ -31,8 +32,8 @@ class SharedPreferencesImplementation(private val context: Context) : SaveModelP
             editor.putString(MODEL_PREFERENCES_HIPS_GIRTH, modelParametersData.hipsGirth)
             editor.putString(MODEL_PREFERENCES_CHEST_WIDTH, modelParametersData.chestWidth)
             editor.putString(MODEL_PREFERENCES_BACK_WIDTH, modelParametersData.backWidth)
+            editor.apply()
         }
-        editor.apply()
         return allParmetersOk
     }
 
@@ -41,7 +42,7 @@ class SharedPreferencesImplementation(private val context: Context) : SaveModelP
         if (modelSharedPref.contains(MODEL_PREFERENCES_IS_SAVED) && modelSharedPref.getBoolean(MODEL_PREFERENCES_IS_SAVED, false)) {
             result = ModelParametersData(
                 isSaved = true,
-                gender = modelSharedPref.getString(MODEL_PREFERENCES_GENDER, "Женский"),
+                gender = modelSharedPref.getString(MODEL_PREFERENCES_GENDER, context.getString(R.string.gender_list_female)),
                 height = modelSharedPref.getString(MODEL_PREFERENCES_HEIGHT, ""),
                 chestGirth = modelSharedPref.getString(MODEL_PREFERENCES_CHEST_GIRTH,  ""),
                 waistGirth = modelSharedPref.getString(MODEL_PREFERENCES_WAIST_GIRTH, ""),
