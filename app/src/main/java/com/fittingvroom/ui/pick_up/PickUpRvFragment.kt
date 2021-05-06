@@ -16,6 +16,7 @@ class PickUpRvFragment : Fragment() {
 
     companion object {
         fun newInstance() = PickUpRvFragment()
+        const val ID_CATEGORY = "ID_CATEGORY"
     }
 
     private var idCategory: Int = 0
@@ -33,7 +34,7 @@ class PickUpRvFragment : Fragment() {
         viewBinding = FragmentPickUpRvBinding.inflate(inflater, container, false)
         val view = viewBinding?.root
         initViewModel()
-        idCategory = arguments?.getInt("ID_CATEGORY") ?: 0
+        idCategory = arguments?.getInt(ID_CATEGORY) ?: 0
         return view
     }
 

@@ -3,10 +3,8 @@ package com.fittingvroom.ui.pick_up
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.fittingvroom.R
 import com.fittingvroom.databinding.RvPickupItemBinding
 import com.fittingvroom.model.entitis.Product
 

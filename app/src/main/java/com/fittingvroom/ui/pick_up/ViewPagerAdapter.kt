@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.fittingvroom.model.entitis.Category
-import com.fittingvroom.model.entitis.Product
+
 
 class ViewPagerAdapter( fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -19,7 +19,7 @@ class ViewPagerAdapter( fragmentManager: FragmentManager) :
     }
     fun createFragment(position: Int): Fragment = PickUpRvFragment().apply {
         arguments = bundleOf(
-            "ID_CATEGORY" to data[position].id
+            PickUpRvFragment.ID_CATEGORY to data[position].id
         )
     }
 
@@ -30,6 +30,8 @@ class ViewPagerAdapter( fragmentManager: FragmentManager) :
     }
 
     override fun getPageTitle(position: Int)=data[position].name
+
+
 
 }
 

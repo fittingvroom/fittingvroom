@@ -6,18 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.fittingvroom.R
 import com.fittingvroom.databinding.FragmentPickUpBinding
 import com.fittingvroom.model.AppState
 import com.fittingvroom.model.entitis.Category
-import com.fittingvroom.model.entitis.Product
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PickUpFragment : Fragment() {
@@ -42,38 +39,19 @@ class PickUpFragment : Fragment() {
         viewBinding?.viewPager?.let {
             it.adapter = adapter
             viewBinding?.tabLayout?.setupWithViewPager(it)
-            it.addOnPageChangeListener(onPageChangeListener())
-
         }
         initToolbarNavigation()
     }
 
-    private fun onPageChangeListener() = object : ViewPager.OnPageChangeListener {
 
-        override fun onPageSelected(position: Int) {
-            setCustomTab(position)
-        }
-
-        override fun onPageScrolled(
-            position: Int,
-            positionOffset: Float,
-            positionOffsetPixels: Int
-        ) {
-        }
-
-        override fun onPageScrollStateChanged(state: Int) {}
-    }
-
-    private fun setCustomTab(position: Int) {
+    private fun setCustomTab() {
         val layoutInflater = LayoutInflater.from(context)
         val tabs = viewBinding?.tabLayout
 
         if (tabs != null)
-            for (i in 0 until tabs.tabCount)
-            {
-                tabs.getTabAt(i)?.customView=null
+            for (i in 0 until tabs.tabCount) {
                 //берем разметку для таба
-                val tab = layoutInflater.inflate(R.layout.item_tab, null)
+                val tab = layoutInflater.inflate(R.layout.item_tab, tabs, false)
                 tab.findViewById<AppCompatTextView>(R.id.tv_name)
                     .text = data[i].name
                 Glide.with(tab.context)
@@ -104,12 +82,11 @@ class PickUpFragment : Fragment() {
     }
 
     private fun retrieveCategogy(data: List<Category>) {
-
         adapter.apply {
             setData(data)
             notifyDataSetChanged()
         }
-        setCustomTab(0)
+        setCustomTab()
     }
 
     private fun setupObservers() {
@@ -118,14 +95,14 @@ class PickUpFragment : Fragment() {
                 when (result) {
                     is AppState.Success -> {
                         viewBinding?.apply {
-                        progressBar.visibility = View.GONE
+                            progressBar.visibility = View.GONE
                         }
                         result.data.let { categoty ->
                             showSuccess(categoty)
                         }
                     }
                     is AppState.Error -> {
-                         showError(result)
+                        showError(result)
                     }
                     is AppState.Loading -> {
                         showLoading()
