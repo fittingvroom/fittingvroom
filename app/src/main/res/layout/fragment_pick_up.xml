@@ -4,14 +4,38 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="?attr/actionBarSize"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_background"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            style="@style/ToolbarTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pick_up_the_image" />
+    </androidx.appcompat.widget.Toolbar>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_pickup"
+        style="@style/BottomButtonTheme.Dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/сhoose_an_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:tabMode="auto"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabGravity="fill" />
+        app:layout_constraintTop_toBottomOf="@id/bt_pickup"
+        app:tabGravity="fill"
+        app:tabMode="auto" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"

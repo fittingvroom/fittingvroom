@@ -6,11 +6,11 @@ import com.fittingvroom.model.entitis.Product
 
 class TestProductRepoImpl : IProructRepo {
     val categorys: List<Category> = listOf(
-        Category(0, "Джинсы", "file:///android_asset/category/Джинсы.png"),
-        Category(1, "Рубашки", "file:///android_asset/category/Рубашки.png"),
-        Category(2, "Платья", "file:///android_asset/category/Платья.png"),
-        Category(3, "Топы", "file:///android_asset/category/Топы.png"),
-        Category(4, "Юбки", "file:///android_asset/category/Юбки.png"),
+        Category(0, "Джинсы", "file:///android_asset/category/джинсы.png"),
+        Category(1, "Рубашки", "file:///android_asset/category/рубашки.png"),
+        Category(2, "Платья", "file:///android_asset/category/платья.png"),
+        Category(3, "Топы", "file:///android_asset/category/футболки.png"),
+        Category(4, "Юбки", "file:///android_asset/category/юбки.png"),
     )
 
 val prodicts= listOf<Product>(
