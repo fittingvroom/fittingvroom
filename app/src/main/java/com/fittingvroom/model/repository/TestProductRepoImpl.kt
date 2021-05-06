@@ -28,9 +28,15 @@ val prodicts= listOf<Product>(
    Product(12,2,"Платье 1007","Синии",2000.0f,"56xdgsdgeter","На любой сезон", listOf("file:///android_asset/dress/d7.png")),
 
 )
-    override suspend fun getCategorys() = categorys
+    override suspend fun getCategorys():List<Category> {
+    Thread.sleep(1000)
+     return categorys
+    }
 
-    override suspend fun getProducts(idCategory: Int) =prodicts.filter { it.idCategory==idCategory }
+    override suspend fun getProducts(idCategory: Int):List<Product> {
+        Thread.sleep(500)
+        return prodicts.filter { it.idCategory==idCategory }
+    }
 
     override suspend fun getProduct(id: Int) = prodicts.filter { it.id==id }.firstOrNull()
 }
