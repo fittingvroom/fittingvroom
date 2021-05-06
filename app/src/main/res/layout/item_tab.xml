@@ -13,7 +13,7 @@
         android:layout_height="75dp"
         android:layout_gravity="center"
         android:background="@drawable/shadow_round"
-        tools:src="@color/teal_700" />
+         />
 
     <TextView
         android:id="@+id/tv_name"
