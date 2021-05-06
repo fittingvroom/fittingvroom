@@ -17,4 +17,14 @@ class PickUpRvViewModel(private val Repository: IProructRepo) : ViewModel() {
             emit(AppState.Error(exception))
         }
     }
+
+    fun getCategorys() = liveData(Dispatchers.IO) {
+        emit(AppState.Loading(null))
+        try {
+            emit(AppState.Success(Repository.getCategorys()))
+
+        } catch (exception: Exception) {
+            emit(AppState.Error(exception))
+        }
+    }
 }

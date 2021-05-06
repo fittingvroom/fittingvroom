@@ -70,42 +70,54 @@ class PickUpRvFragment : Fragment() {
                     is AppState.Success -> {
                         viewBinding?.apply { progressBar.visibility = View.GONE }
                         result.data.let { prducts ->
-                            if (prducts != null && prducts.isNotEmpty()) {
-                                viewBinding?.apply {
-                                    recyclerview.visibility = View.VISIBLE
-                                    tvNoData.visibility = View.GONE
-                                }
-                                retrieveProducts(prducts)
-
-                            } else {
-                                viewBinding?.apply {
-                                    recyclerview.visibility = View.GONE
-                                    tvNoData.visibility = View.VISIBLE
-                                }
-                            }
+                            showSuccess(prducts)
                         }
                     }
                     is AppState.Error -> {
-                        viewBinding?.apply {
-                            progressBar.visibility = View.GONE
-                            recyclerview.visibility = View.GONE
-                            tvNoData.visibility = View.VISIBLE
-                        }
-                        Toast.makeText(context, result.error.localizedMessage, Toast.LENGTH_LONG)
-                            .show()
+                        showError(result)
                     }
                     is AppState.Loading -> {
-                        viewBinding?.apply {
-                            progressBar.visibility = View.VISIBLE
-                            recyclerview.visibility = View.GONE
-                            tvNoData.visibility = View.GONE
-                        }
+                        showLoading()
                     }
                 }
             }
 
 
         })
+    }
+
+    private fun showSuccess(prducts: List<Product>?) {
+        if (prducts != null && prducts.isNotEmpty()) {
+            viewBinding?.apply {
+                recyclerview.visibility = View.VISIBLE
+                tvNoData.visibility = View.GONE
+            }
+            retrieveProducts(prducts)
+
+        } else {
+            viewBinding?.apply {
+                recyclerview.visibility = View.GONE
+                tvNoData.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun showError(result: AppState.Error) {
+        viewBinding?.apply {
+            progressBar.visibility = View.GONE
+            recyclerview.visibility = View.GONE
+            tvNoData.visibility = View.VISIBLE
+        }
+        Toast.makeText(context, result.error.localizedMessage, Toast.LENGTH_LONG)
+            .show()
+    }
+
+    private fun showLoading() {
+        viewBinding?.apply {
+            progressBar.visibility = View.VISIBLE
+            recyclerview.visibility = View.GONE
+            tvNoData.visibility = View.GONE
+        }
     }
 
     private val onListItemClickListener: OnListItemClickListener =
