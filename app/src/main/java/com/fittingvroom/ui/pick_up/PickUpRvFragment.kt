@@ -54,6 +54,7 @@ class PickUpRvFragment : Fragment() {
 
     private fun setupUI() {
         viewBinding?.recyclerview?.adapter = adapter
+        viewBinding?.recyclerview?.setHasFixedSize(true)
     }
 
     private fun retrieveProducts(data: List<Product>) {
