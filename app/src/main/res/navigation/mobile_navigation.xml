@@ -60,4 +60,14 @@
         android:name="com.fittingvroom.ui.model.parameters.ModelParametersFragment"
         android:label="fragment_model_parameters"
         tools:layout="@layout/fragment_model_parameters" />
+    <fragment
+        android:id="@+id/pickUpFragment"
+        android:name="com.fittingvroom.ui.pick_up.PickUpFragment"
+        android:label="PickUpFragment"
+        tools:layout="@layout/fragment_pick_up"/>
+    <fragment
+        android:id="@+id/pickUpRvFragment"
+        android:name="com.fittingvroom.ui.pick_up.PickUpRvFragment"
+        android:label="fragment_pick_up_rv"
+        tools:layout="@layout/fragment_pick_up_rv" />
 </navigation>

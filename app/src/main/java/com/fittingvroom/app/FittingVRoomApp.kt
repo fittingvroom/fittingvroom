@@ -3,6 +3,7 @@ package com.fittingvroom.app
 import android.app.Application
 import com.fittingvroom.di.application
 import com.fittingvroom.di.modelParametersScreen
+import com.fittingvroom.di.modelPickUp
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -12,7 +13,7 @@ class FittingVRoomApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(applicationContext)
-            modules(listOf(application, modelParametersScreen))
+            modules(listOf(application, modelParametersScreen,modelPickUp))
         }
     }
 }

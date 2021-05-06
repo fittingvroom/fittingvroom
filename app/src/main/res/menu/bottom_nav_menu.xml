@@ -17,7 +17,7 @@
         android:title="@string/title_favorites" />
 
     <item
-        android:id="@+id/navigation_cart"
+        android:id="@+id/pickUpRvFragment"
         android:icon="@drawable/ic_cart_black_24dp"
         android:title="@string/title_cart" />
 </menu>
