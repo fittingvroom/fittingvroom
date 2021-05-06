@@ -122,7 +122,6 @@ class PickUpFragment : Fragment() {
                         }
                         result.data.let { categoty ->
                             showSuccess(categoty)
-
                         }
                     }
                     is AppState.Error -> {

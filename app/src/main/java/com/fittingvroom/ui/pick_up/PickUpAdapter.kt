@@ -3,9 +3,10 @@ package com.fittingvroom.ui.pick_up
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
+import com.fittingvroom.R
 import com.fittingvroom.databinding.RvPickupItemBinding
 import com.fittingvroom.model.entitis.Product
 
@@ -41,16 +42,12 @@ class PickUpAdapter(private var onListItemClickListener: OnListItemClickListener
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 binding.tvName.text = data.name
                 binding.tvColor.text = data.color
-                binding.tvPrice.text = "${data.price} Руб."
+                binding.tvPrice.text = data.price.toString()
 
                 Glide.with(binding.imageView.context)
                     .load(
                         Uri.parse(data.img.getOrNull(0))
                     )
-                    //.circleCrop()
-//                    .apply(RequestOptions.circleCropTransform())
-                    //apply(RequestOptions.centerCropTransform())
-
                     .fitCenter()
                     .into(binding.imageView)
                 itemView.setOnClickListener { onListItemClickListener.onItemClick(data) }

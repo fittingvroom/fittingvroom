@@ -6,4 +6,9 @@
     <dimen name="standard_text_size">20sp</dimen>
     <dimen name="bottom_button_insets">0dp</dimen>
     <dimen name="parameters_btn_horizontal_margin">12dp</dimen>
+    <dimen name="tab_img_size">75dp</dimen>
+    <dimen name="pick_up_font_size">20sp</dimen>
+    <dimen name="pick_up_margin_top_text">10dp</dimen>
+    <dimen name="pick_up_margin_start_rub">5dp</dimen>
+    <dimen name="pick_up_margin_item">5dp</dimen>
 </resources>

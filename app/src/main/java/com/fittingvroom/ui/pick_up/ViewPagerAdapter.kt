@@ -7,10 +7,9 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.fittingvroom.model.entitis.Category
 import com.fittingvroom.model.entitis.Product
 
-class ViewPagerAdapter(private val fragmentManager: FragmentManager) :
+class ViewPagerAdapter( fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-   // private val cat = intArrayOf(0, 1, 2, 3,4,5,6,7,8,9)
     private var data: List<Category> = arrayListOf()
 
     fun setData(data: List<Category>) {
@@ -23,7 +22,6 @@ class ViewPagerAdapter(private val fragmentManager: FragmentManager) :
             "ID_CATEGORY" to data[position].id
         )
     }
-
 
     override fun getCount(): Int = data.size
 
