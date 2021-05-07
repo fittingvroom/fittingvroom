@@ -29,7 +29,7 @@
     <string name="_4_">4</string>
     <string name="_5_">5</string>
     <string name="_6_">6</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
 
 <!--    Home screen-->
     <string name="home_page_bottom_btn_text">Создать манекен</string>
@@ -52,5 +52,11 @@
     <string name="parameter_back_width_title">Ширина спины</string>
     <string name="parameter_save_btn">Сохранить</string>
     <string name="parameter_continue_btn">Продолжить</string>
+
+    <!--    pick up screen-->
+    <string name="no_data">Нет данных</string>
+    <string name="pick_up_the_image">Подобрать образ</string>
+    <string name="сhoose_an_image">Выбрать образ</string>
+    <string name="rub"> Руб.</string>
 
 </resources>
