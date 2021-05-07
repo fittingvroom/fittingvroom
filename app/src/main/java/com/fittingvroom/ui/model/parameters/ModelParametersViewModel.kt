@@ -1,9 +1,8 @@
 package com.fittingvroom.ui.model.parameters
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.fittingvroom.data.ModelParametersData
+import com.fittingvroom.datasource.parameters.SaveModelParameters
 import com.fittingvroom.ui.base.BaseViewModel
 import kotlinx.coroutines.*
 
@@ -26,18 +25,14 @@ class ModelParametersViewModel(
         _mutableLiveData.postValue(parameters)
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        cancelJob()
-    }
-
     fun putData(modelParametersData: ModelParametersData) : Boolean {
-        if (modelParametersData.isNotEmpty()) {
+        val result = modelParametersData.isNotEmpty()
+        if (result) {
             viewModelCoroutineScope.launch {
                 saveParameters(modelParametersData)
             }
         }
-        return modelParametersData.isNotEmpty()
+        return result
     }
 
     suspend fun saveParameters(modelParametersData: ModelParametersData) {

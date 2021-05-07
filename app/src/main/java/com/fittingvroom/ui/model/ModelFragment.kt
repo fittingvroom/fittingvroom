@@ -5,15 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
+import com.fittingvroom.data.ModelParametersData
 import com.fittingvroom.databinding.FragmentModelBinding
+import com.fittingvroom.model.AppState
+import com.fittingvroom.ui.base.BaseFragment
+import com.fittingvroom.ui.view3d.SceneViewer
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class ModelFragment : Fragment() {
+class ModelFragment : BaseFragment<AppState<ModelParametersData>>() {
 
-    private lateinit var modelViewModel: ModelViewModel
+    override lateinit var model: ModelViewModel
     private var viewBinding: FragmentModelBinding? = null
     private val navigation by lazy { findNavController() }
 
@@ -32,11 +35,13 @@ class ModelFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initToolbarNavigation()
         setBtnListeners()
+        model.getData()
     }
 
     private fun initViewModel() {
-        modelViewModel =
-                ViewModelProvider(this).get(ModelViewModel::class.java)
+        val modelViewModel : ModelViewModel by viewModel()
+        model = modelViewModel
+        model.subscribe().observe(viewLifecycleOwner, { renderData(it) })
     }
 
     private fun initToolbarNavigation() {
@@ -63,5 +68,42 @@ class ModelFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         viewBinding = null
+    }
+
+    override fun renderData(state: AppState<ModelParametersData>) {
+        when (state) {
+            is AppState.Success -> {
+                val dataModel : ModelParametersData = state.data
+                showViewSuccess()
+                if (dataModel.isSaved) {
+                    showSceneView()
+                    SceneViewer.showScene(context, resources, viewBinding?.modelSceneView, viewBinding?.modelSceneViewPb)
+                } else {
+                    showImageView()
+                }
+            }
+            is AppState.Error -> {
+
+            }
+        }
+    }
+
+    private fun showSceneView() {
+        val binding = viewBinding ?: return
+        binding.modelImageViewMannequin.visibility = View.GONE
+        binding.modelSceneView.visibility = View.VISIBLE
+        binding.modelSceneViewPb.visibility = View.GONE
+    }
+
+    private fun showImageView() {
+        val binding = viewBinding ?: return
+        binding.modelImageViewMannequin.visibility = View.VISIBLE
+        binding.modelSceneView.visibility = View.GONE
+        binding.modelSceneViewPb.visibility = View.GONE
+    }
+
+    private fun showViewSuccess() {
+        val binding = viewBinding ?: return
+        binding.modelSuccesLayout.visibility = View.VISIBLE
     }
 }

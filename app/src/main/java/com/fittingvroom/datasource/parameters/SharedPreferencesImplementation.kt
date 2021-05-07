@@ -1,4 +1,4 @@
-package com.fittingvroom.ui.model.parameters
+package com.fittingvroom.datasource.parameters
 
 import android.content.Context
 import com.fittingvroom.R
@@ -39,7 +39,7 @@ class SharedPreferencesImplementation(private val context: Context) : SaveModelP
 
     override suspend fun getParameters(): ModelParametersData {
         var result = ModelParametersData()
-        if (modelSharedPref.contains(MODEL_PREFERENCES_IS_SAVED) && modelSharedPref.getBoolean(MODEL_PREFERENCES_IS_SAVED, false)) {
+        if (isSaved()) {
             result = ModelParametersData(
                 isSaved = true,
                 gender = modelSharedPref.getString(MODEL_PREFERENCES_GENDER, context.getString(R.string.gender_list_female)),
@@ -52,5 +52,10 @@ class SharedPreferencesImplementation(private val context: Context) : SaveModelP
             )
         }
         return result
+    }
+
+    override suspend fun isSaved(): Boolean {
+        return (modelSharedPref.contains(MODEL_PREFERENCES_IS_SAVED)
+                && modelSharedPref.getBoolean(MODEL_PREFERENCES_IS_SAVED, false))
     }
 }

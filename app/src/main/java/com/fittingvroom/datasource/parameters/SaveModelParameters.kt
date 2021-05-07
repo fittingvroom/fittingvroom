@@ -1,4 +1,4 @@
-package com.fittingvroom.ui.model.parameters
+package com.fittingvroom.datasource.parameters
 
 import com.fittingvroom.data.ModelParametersData
 
