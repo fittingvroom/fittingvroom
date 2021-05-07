@@ -20,7 +20,7 @@ class DecimalLimiter  {
         if (decimalCount > 1)
             return str.dropLast(1)
 
-        /**Проходим по строке, оставляя 1 символ после точки
+        /**Проходим по строке, оставляя MAX_DECIMAL символов после точки
          */
         while (i < max) {
             t = str[i]
