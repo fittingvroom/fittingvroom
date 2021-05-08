@@ -65,6 +65,14 @@ class ModelFragment : BaseFragment<AppState<ModelParametersData>>() {
         }
     }
 
+    override fun onPause() {
+        viewBinding?.modelSceneView?.pause()
+        super.onPause()
+    }
+    override fun onResume() {
+        viewBinding?.modelSceneView?.resume()
+        super.onResume()
+    }
     override fun onDestroy() {
         super.onDestroy()
         viewBinding = null
