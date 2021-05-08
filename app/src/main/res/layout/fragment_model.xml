@@ -26,23 +26,46 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/model_image_view_mannequin"
+    <FrameLayout
+        android:id="@+id/model_succes_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/transparent_background"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_marginBottom="?attr/actionBarSize"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
-        android:src="@drawable/mannequin"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/model_guideline"
-        app:layout_constraintStart_toStartOf="@id/model_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="ContentDescription" />
+        >
+
+        <ImageView
+            android:id="@+id/model_image_view_mannequin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent_background"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:src="@drawable/mannequin"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/model_guideline"
+            app:layout_constraintStart_toStartOf="@id/model_guideline"
+            tools:ignore="ContentDescription" />
+
+        <com.google.ar.sceneform.SceneView
+            android:id="@+id/model_scene_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/model_scene_view_pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/mannequin_help_image_btn"

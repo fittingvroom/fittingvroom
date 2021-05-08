@@ -52,6 +52,7 @@
     <string name="parameter_back_width_title">Ширина спины</string>
     <string name="parameter_save_btn">Сохранить</string>
     <string name="parameter_continue_btn">Продолжить</string>
+    <string name="no_parameters_error">Введите все параметры!</string>
 
     <!--    pick up screen-->
     <string name="no_data">Нет данных</string>
