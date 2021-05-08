@@ -69,5 +69,20 @@
         android:id="@+id/pickUpRvFragment"
         android:name="com.fittingvroom.ui.pick_up.PickUpRvFragment"
         android:label="fragment_pick_up_rv"
-        tools:layout="@layout/fragment_pick_up_rv" />
+        tools:layout="@layout/fragment_pick_up_rv" >
+        <action
+            android:id="@+id/action_pickUpRvFragment_to_productCardFragment"
+            app:destination="@id/productCardFragment"
+            app:popUpTo="@id/pickUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productCardFragment"
+        android:name="com.fittingvroom.ui.pick_up.ProductCardFragment"
+        android:label="ProductCardFragment"
+        tools:layout="@layout/fragment_product_card">
+        <argument
+            android:name="ID_PRODUCT"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>

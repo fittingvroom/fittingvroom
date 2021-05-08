@@ -41,6 +41,7 @@ class PickUpFragment : Fragment() {
             viewBinding?.tabLayout?.setupWithViewPager(it)
         }
         initToolbarNavigation()
+        setupObservers()
     }
 
 
@@ -71,10 +72,7 @@ class PickUpFragment : Fragment() {
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        setupObservers()
-    }
+
 
     private fun initViewModel() {
         val viewModel_: PickUpRvViewModel by viewModel()

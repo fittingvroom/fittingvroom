@@ -44,7 +44,7 @@ class PickUpAdapter(private var onListItemClickListener: OnListItemClickListener
 
                 Glide.with(binding.imageView.context)
                     .load(
-                        Uri.parse(data.img.getOrNull(0))
+                        Uri.parse(data.img.getOrElse(0) { "" })
                     )
                     .fitCenter()
                     .into(binding.imageView)

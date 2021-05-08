@@ -8,5 +8,6 @@ data class Product (
     var price:Float=.0f,
     var vendorCode:String="",
     var description:String="",
+    var size:List<String> = listOf(),
     var img:List<String> = listOf()
 )

@@ -58,5 +58,9 @@
     <string name="pick_up_the_image">Подобрать образ</string>
     <string name="сhoose_an_image">Выбрать образ</string>
     <string name="rub"> Руб.</string>
+    <string name="basket">Корзина</string>
+    <string name="choose_size">Выбрать размера</string>
+    <string name="art_">Арт №</string>
+    <string name="copy_clipboard">Скопировано в буфер обмена</string>
 
 </resources>

@@ -5,6 +5,7 @@ import com.fittingvroom.ui.model.parameters.ModelParametersViewModel
 import com.fittingvroom.ui.model.parameters.SaveModelParameters
 import com.fittingvroom.ui.model.parameters.SharedPreferencesImplementation
 import com.fittingvroom.ui.pick_up.PickUpRvViewModel
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val application = module {
@@ -16,5 +17,5 @@ val modelParametersScreen = module {
 }
 
 val modelPickUp = module {
-    factory { PickUpRvViewModel(TestProductRepoImpl())}
+    viewModel { PickUpRvViewModel(TestProductRepoImpl())}
 }
