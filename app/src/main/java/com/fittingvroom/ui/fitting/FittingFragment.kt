@@ -4,39 +4,118 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.fittingvroom.R
+import com.fittingvroom.data.ModelParametersData
 import com.fittingvroom.databinding.FragmentFittingBinding
+import com.fittingvroom.databinding.FragmentModelBinding
+import com.fittingvroom.model.AppState
+import com.fittingvroom.ui.base.BaseFragment
+import com.fittingvroom.ui.model.ModelViewModel
 import com.fittingvroom.ui.view3d.SceneViewer
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class FittingFragment : Fragment() {
+class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
 
-    private var binding: FragmentFittingBinding? = null
+    override lateinit var model: FittingViewModel
+    private var viewBinding: FragmentFittingBinding? = null
+    private val navigation by lazy { findNavController() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFittingBinding.inflate(inflater, container, false)
-        val view = binding?.root
-        SceneViewer.showScene(context, resources, binding?.fittingSceneView, binding?.fittingPb)
+        viewBinding = FragmentFittingBinding.inflate(inflater, container, false)
+        val view = viewBinding?.root
+        initViewModel()
         return view
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding?.fittingSceneView?.resume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initToolbarNavigation()
+        setBtnListeners()
+        model.getData()
     }
 
+    private fun initViewModel() {
+        val viewModel : FittingViewModel by viewModel()
+        model = viewModel
+        model.subscribe().observe(viewLifecycleOwner, { renderData(it) })
+    }
+
+    private fun initToolbarNavigation() {
+        val binding = viewBinding ?: return
+        binding.fittingToolbar.setNavigationIcon(R.drawable.ic_toolbar_back_btn)
+        binding.fittingToolbar.setNavigationOnClickListener {
+            navigation.popBackStack()
+        }
+    }
+
+    private fun setBtnListeners() {
+        val binding = viewBinding ?: return
+        binding.fittingBottomButton.setOnClickListener {
+//            navigation.navigate(R.id.action_navigation_model_to_modelParametersFragment)
+        }
+        binding.fittingHelpImageBtn.setOnClickListener {
+//            navigation.navigate(R.id.action_navigation_model_to_help_fragment)
+        }
+        binding.fittingShareImageBtn.setOnClickListener {
+            Toast.makeText(requireContext(), "Поделиться", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onPause() {
+        viewBinding?.fittingSceneView?.pause()
         super.onPause()
-        binding?.fittingSceneView?.pause()
+    }
+    override fun onResume() {
+        viewBinding?.fittingSceneView?.resume()
+        super.onResume()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        viewBinding = null
     }
 
-    override fun onDestroy() {
-        binding = null
-        super.onDestroy()
+    override fun renderData(state: AppState<ModelParametersData>) {
+        when (state) {
+            is AppState.Success -> {
+                val dataModel : ModelParametersData = state.data
+                showViewSuccess()
+                if (dataModel.isSaved) {
+                    showSceneView()
+                    SceneViewer.showScene(context, resources, viewBinding?.fittingSceneView, viewBinding?.fittingSceneViewPb)
+                } else {
+                    showImageView()
+                }
+            }
+            is AppState.Error -> {
+
+            }
+        }
+    }
+
+    private fun showSceneView() {
+        val binding = viewBinding ?: return
+        binding.fittingImageViewMannequin.visibility = View.GONE
+        binding.fittingSceneView.visibility = View.VISIBLE
+        binding.fittingSceneView.visibility = View.GONE
+    }
+
+    private fun showImageView() {
+        val binding = viewBinding ?: return
+        binding.fittingImageViewMannequin.visibility = View.VISIBLE
+        binding.fittingSceneView.visibility = View.GONE
+        binding.fittingSceneViewPb.visibility = View.GONE
+    }
+
+    private fun showViewSuccess() {
+        val binding = viewBinding ?: return
+        binding.fittingSuccesLayout.visibility = View.VISIBLE
     }
 }

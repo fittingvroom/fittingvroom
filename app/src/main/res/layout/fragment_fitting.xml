@@ -4,22 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
+    android:background="@drawable/model_background_gradient_shape"
     tools:context=".ui.fitting.FittingFragment">
 
-    <com.google.ar.sceneform.SceneView
-        android:id="@+id/fitting_scene_view"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fitting_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/toolbar_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            style="@style/ToolbarTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fitting_toolbar_title" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/fitting_succes_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"/>
-
-    <ProgressBar
-        android:id="@+id/fitting_pb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <ImageView
+            android:id="@+id/fitting_image_view_mannequin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent_background"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:src="@drawable/mannequin"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/fitting_guideline"
+            app:layout_constraintStart_toStartOf="@id/fitting_guideline"
+            tools:ignore="ContentDescription" />
+
+        <com.google.ar.sceneform.SceneView
+            android:id="@+id/fitting_scene_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/fitting_scene_view_pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fitting_help_image_btn"
+        android:layout_width="@dimen/mannequin_help_image_width"
+        android:layout_height="@dimen/mannequin_help_image_height"
+        android:layout_marginTop="@dimen/mannequin_help_image_margin_top"
+        android:layout_marginEnd="@dimen/mannequin_help_image_margin_end"
+        android:background="@color/transparent_background"
+        android:src="@drawable/ic_help_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fitting_toolbar" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fitting_share_image_btn"
+        android:layout_width="@dimen/mannequin_share_image_width"
+        android:layout_height="@dimen/mannequin_share_image_height"
+        android:layout_marginTop="@dimen/mannequin_share_image_margin_top"
+        android:layout_marginEnd="@dimen/mannequin_share_image_margin_end"
+        android:background="@color/transparent_background"
+        android:src="@drawable/ic_shared_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fitting_help_image_btn" />
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/BottomButtonTheme.Dark"
+        android:id="@+id/fitting_bottom_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fitting_screen_bottom_btn_text"
+        android:drawableStart="@drawable/ic_toolbar_back_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fitting_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
