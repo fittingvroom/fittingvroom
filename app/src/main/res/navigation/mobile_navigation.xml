@@ -20,7 +20,15 @@
         android:id="@+id/navigation_fitting"
         android:name="com.fittingvroom.ui.fitting.FittingFragment"
         android:label="@string/title_fitting"
-        tools:layout="@layout/fragment_fitting" />
+        tools:layout="@layout/fragment_fitting" >
+        <argument
+            android:name="ID_PRODUCT"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="SIZE_PRODUCT"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_model"
@@ -84,5 +92,9 @@
             android:name="ID_PRODUCT"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_productCardFragment_to_navigation_fitting"
+            app:destination="@id/navigation_fitting"
+            app:popUpTo="@id/productCardFragment" />
     </fragment>
 </navigation>

@@ -24,6 +24,8 @@ class ProductCardFragment : Fragment() {
     companion object {
         fun newInstance() = ProductCardFragment()
         const val ID_PRODICT = "ID_PRODUCT"
+        const val SIZE_PRODICT = "SIZE_PRODICT"
+
     }
 
     private var idProduct: Int = 0
@@ -89,9 +91,33 @@ class ProductCardFragment : Fragment() {
                 .setMessage(resources.getString(R.string.copy_clipboard))
                 .show()
         }
-        binding.imgTryOn.setOnClickListener {  }
-        binding.imgBasket.setOnClickListener {  }
-        binding.imgFavorites.setOnClickListener {  }
+        binding.imgTryOn.setOnClickListener {
+            if (isSizeSelected()) {
+                val bundle = Bundle()
+                bundle.putInt(ID_PRODICT, idProduct)
+                bundle.putString(SIZE_PRODICT, binding.tvSize.text.toString())
+                navigation.navigate(R.id.action_productCardFragment_to_navigation_fitting, bundle)
+            } else {
+                Toast.makeText(context, getString(R.string.no_size), Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+        binding.imgBasket.setOnClickListener { }
+        binding.btBasket.setOnClickListener {
+            if (isSizeSelected()) {
+            //************************
+                Toast.makeText(context, "Сдесь должна быть корзина", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Toast.makeText(context, getString(R.string.no_size), Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+        binding.imgFavorites.setOnClickListener {
+            //************************
+            Toast.makeText(context, "Сдесь должно быть избранное", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     private fun retrieveData(data: Product) {
@@ -106,9 +132,10 @@ class ProductCardFragment : Fragment() {
     }
 
     private fun initSizeTextView(size: List<String>) {
-
+        val binding = viewBinding ?: return
         val adapter = ArrayAdapter(requireContext(), R.layout.gender_list_item, size)
-        viewBinding?.tvSize?.setAdapter(adapter)
+        binding.tvSize.apply { setAdapter(adapter) }
+
     }
 
     private fun setupObservers() {
@@ -132,6 +159,11 @@ class ProductCardFragment : Fragment() {
 
 
         })
+    }
+
+    fun isSizeSelected(): Boolean {
+        val binding = viewBinding ?: return false
+        return !binding.tvSize.text.isNullOrEmpty()
     }
 
     private fun showSuccess(prduct: Product?) {

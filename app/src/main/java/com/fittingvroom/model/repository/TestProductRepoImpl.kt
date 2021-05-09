@@ -15,7 +15,7 @@ class TestProductRepoImpl : IProructRepo {
 
 val prodicts= listOf<Product>(
    Product(0,0,"Джинсы 1","Синий",2000.0f,"56465geter","На любой сезон", listOf("L","M","XL","XXL"), listOf("file:///android_asset/Jeans/j1.png","file:///android_asset/Jeans/j5.png")),
-   Product(1,0,"Джинсы 2","Синий",3000.0f,"56465geter","На любой сезон", listOf(),listOf("file:///android_asset/Jeans/j2.png")),
+   Product(1,0,"Джинсы 2","Синий",3000.0f,"56465geter","На любой сезон", listOf("L"),listOf("file:///android_asset/Jeans/j2.png")),
    Product(2,0,"Джинсы 3","Синий",1500.0f,"56eterter","На любой сезон",listOf("L","M","XL"), listOf("file:///android_asset/Jeans/j3.png")),
    Product(3,0,"Джинсы 4","Синий",2000.0f,"56465geter","На любой сезон",listOf("L","M","XL"), listOf("file:///android_asset/Jeans/j4.png")),
    Product(4,0,"Джинсы 5","Синий",5000.0f,"56dgseter","На любой сезон",listOf("L","M","XL"), listOf("file:///android_asset/Jeans/j7.png")),

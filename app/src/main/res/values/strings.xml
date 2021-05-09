@@ -63,5 +63,6 @@
     <string name="choose_size">Выбрать размера</string>
     <string name="art_">Арт №</string>
     <string name="copy_clipboard">Скопировано в буфер обмена</string>
+    <string name="no_size">Не выбран размер</string>
 
 </resources>
