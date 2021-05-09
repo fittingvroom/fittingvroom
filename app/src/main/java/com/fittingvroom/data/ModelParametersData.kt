@@ -9,4 +9,14 @@ data class ModelParametersData(
         var hipsGirth : String? = "",
         var chestWidth : String? = "",
         var backWidth : String? = ""
-)
+) {
+        fun isNotEmpty() : Boolean {
+                return !(gender == null || gender == ""
+                        || height == null || height == ""
+                        || chestGirth == null || chestGirth == ""
+                        || waistGirth == null || waistGirth == ""
+                        || hipsGirth == null || hipsGirth == ""
+                        || chestWidth == null || chestWidth == ""
+                        || backWidth == null || backWidth == "")
+        }
+}

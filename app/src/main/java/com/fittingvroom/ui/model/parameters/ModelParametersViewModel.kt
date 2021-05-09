@@ -1,16 +1,15 @@
 package com.fittingvroom.ui.model.parameters
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.fittingvroom.data.ModelParametersData
+import com.fittingvroom.datasource.parameters.SaveModelParameters
+import com.fittingvroom.ui.base.BaseViewModel
 import kotlinx.coroutines.*
 
 class ModelParametersViewModel(
     private val parameters: SaveModelParameters
-) : ViewModel() {
+) : BaseViewModel<ModelParametersData>() {
 
-    private val _mutableLiveData = MutableLiveData<ModelParametersData>()
     private val liveDataForViewToObserve: LiveData<ModelParametersData> = _mutableLiveData
 
     fun subscribe(): LiveData<ModelParametersData> {
@@ -26,37 +25,22 @@ class ModelParametersViewModel(
         _mutableLiveData.postValue(parameters)
     }
 
-    private val viewModelCoroutineScope = CoroutineScope(
-        Dispatchers.Main
-                + SupervisorJob()
-                + CoroutineExceptionHandler { _, throwable ->
-            handleError(throwable)
-        })
-
-    override fun onCleared() {
-        super.onCleared()
-        cancelJob()
+    fun putData(modelParametersData: ModelParametersData) : Boolean {
+        val result = modelParametersData.isNotEmpty()
+        if (result) {
+            viewModelCoroutineScope.launch {
+                saveParameters(modelParametersData)
+            }
+        }
+        return result
     }
 
-    private fun cancelJob() {
-        viewModelCoroutineScope.coroutineContext.cancelChildren()
+    suspend fun saveParameters(modelParametersData: ModelParametersData) {
+        if (modelParametersData.isNotEmpty()) {
+            parameters.putParameters(modelParametersData, true)
+        }
     }
 
-    private fun handleError(error: Throwable) {
-
-    }
-
-    fun saveParameters(modelParametersData: ModelParametersData) : Boolean{
-        return parameters.putParameters(modelParametersData, dataIsNotEmpty(modelParametersData))
-    }
-
-    private fun dataIsNotEmpty(saveData: ModelParametersData): Boolean {
-        return !(saveData.gender == null || saveData.gender == ""
-                || saveData.height == null || saveData.height == ""
-                || saveData.chestGirth == null || saveData.chestGirth == ""
-                || saveData.waistGirth == null || saveData.waistGirth == ""
-                || saveData.hipsGirth == null || saveData.hipsGirth == ""
-                || saveData.chestWidth == null || saveData.chestWidth == ""
-                || saveData.backWidth == null || saveData.backWidth == "")
+    override fun handleError(error: Throwable) {
     }
 }
