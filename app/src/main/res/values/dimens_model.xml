@@ -10,4 +10,5 @@
     <dimen name="mannequin_share_image_margin_end">24dp</dimen>
     <dimen name="model_parameter_title_text_size">20sp</dimen>
     <dimen name="model_parameter_ti_layout_margin_top">8dp</dimen>
+    <dimen name="fitting_cart_add_margin_bottom">24dp</dimen>
 </resources>

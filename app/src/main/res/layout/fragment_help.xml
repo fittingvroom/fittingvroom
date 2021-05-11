@@ -22,6 +22,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="@dimen/mannequin_help_image_width"
+            android:layout_height="@dimen/mannequin_help_image_height"
+            android:layout_marginTop="@dimen/mannequin_help_image_margin_top"
+            android:layout_marginEnd="@dimen/mannequin_help_image_margin_end"
+            android:background="@color/transparent_background"
+            android:src="@drawable/ic_close_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView"
             android:layout_width="wrap_content"

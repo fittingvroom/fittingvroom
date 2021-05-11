@@ -65,4 +65,8 @@
     <string name="copy_clipboard">Скопировано в буфер обмена</string>
     <string name="no_size">Не выбран размер</string>
 
+<!--    Fitting screen-->
+    <string name="fitting_toolbar_title">Подобрать образ</string>
+    <string name="fitting_to_pick_up_btn_text">Выбрать образ</string>
+
 </resources>
