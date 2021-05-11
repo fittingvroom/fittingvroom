@@ -20,7 +20,15 @@
         android:id="@+id/navigation_fitting"
         android:name="com.fittingvroom.ui.fitting.FittingFragment"
         android:label="@string/title_fitting"
-        tools:layout="@layout/fragment_fitting" />
+        tools:layout="@layout/fragment_fitting" >
+        <argument
+            android:name="ID_PRODUCT"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="SIZE_PRODUCT"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_model"
@@ -69,5 +77,24 @@
         android:id="@+id/pickUpRvFragment"
         android:name="com.fittingvroom.ui.pick_up.PickUpRvFragment"
         android:label="fragment_pick_up_rv"
-        tools:layout="@layout/fragment_pick_up_rv" />
+        tools:layout="@layout/fragment_pick_up_rv" >
+        <action
+            android:id="@+id/action_pickUpRvFragment_to_productCardFragment"
+            app:destination="@id/productCardFragment"
+            app:popUpTo="@id/pickUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productCardFragment"
+        android:name="com.fittingvroom.ui.pick_up.ProductCardFragment"
+        android:label="ProductCardFragment"
+        tools:layout="@layout/fragment_product_card">
+        <argument
+            android:name="ID_PRODUCT"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/action_productCardFragment_to_navigation_fitting"
+            app:destination="@id/navigation_fitting"
+            app:popUpTo="@id/productCardFragment" />
+    </fragment>
 </navigation>

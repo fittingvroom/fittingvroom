@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.fittingvroom.R
 import com.fittingvroom.databinding.FragmentPickUpRvBinding
 import com.fittingvroom.model.AppState
 import com.fittingvroom.model.entitis.Product
+import com.fittingvroom.ui.pick_up.ProductCardFragment.Companion.ID_PRODICT
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PickUpRvFragment : Fragment() {
@@ -38,6 +40,12 @@ class PickUpRvFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupUI()
+        setupObservers()
+
+    }
     private fun initViewModel() {
 
         val viewModel_: PickUpRvViewModel by viewModel()
@@ -45,13 +53,7 @@ class PickUpRvFragment : Fragment() {
 
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
-        setupUI()
-        setupObservers()
-
-    }
 
     private fun setupUI() {
         viewBinding?.recyclerview?.adapter = adapter
@@ -66,7 +68,7 @@ class PickUpRvFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.getProduct(idCategory).observe(viewLifecycleOwner, { it ->
+        viewModel.getProducts(idCategory).observe(viewLifecycleOwner, { it ->
             it?.let { result ->
                 when (result) {
                     is AppState.Success -> {
@@ -125,7 +127,9 @@ class PickUpRvFragment : Fragment() {
     private val onListItemClickListener: OnListItemClickListener =
         object : OnListItemClickListener {
             override fun onItemClick(data: Product) {
-                Toast.makeText(context, data.name, Toast.LENGTH_SHORT).show()
+                val bundle = Bundle()
+                bundle.putInt(ID_PRODICT, data.id)
+                navigation.navigate(R.id.productCardFragment,bundle)
             }
         }
 

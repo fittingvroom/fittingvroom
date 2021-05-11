@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="?attr/actionBarSize"
+    tools:context=".ui.model.ModelFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightgrey"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/no_data"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/imageSwitcher"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/lightgrey"
+
+        app:layout_constraintBottom_toTopOf="@+id/tv_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:dotsColor="@color/white"
+        app:dotsCornerRadius="@dimen/DotsIndicatorRadius"
+        app:dotsSize="@dimen/DotsIndicator_dotsize"
+        app:dotsSpacing="@dimen/DotsIndicator_spacing"
+        app:dotsWidthFactor="2.5"
+        android:layout_marginBottom="@dimen/DotsIndicator_margin_bot"
+        app:selectedDotColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/imageSwitcher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:progressMode="true"
+        />
+    <ImageView
+        android:id="@+id/img_basket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/basket"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintTop_toTopOf="@+id/imageSwitcher"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9" />
+    <ImageView
+        android:id="@+id/img_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/favorite_border"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintTop_toBottomOf="@+id/img_basket"
+
+        app:layout_constraintEnd_toStartOf="@+id/guideline9" />
+    <ImageView
+        android:id="@+id/img_try_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/try_on"
+        app:layout_constraintBottom_toBottomOf="@+id/imageSwitcher"
+        android:layout_marginBottom="?attr/actionBarSize"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9" />
+    <!--Название-->
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/Product_card_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/vendor_code"
+        app:layout_constraintEnd_toStartOf="@+id/tv_price"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        tools:text="Хлопковая рубашка" />
+    <!--Цена-->
+    <TextView
+        android:id="@+id/tv_price"
+        style="@style/Product_card_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/pick_up_margin_start_rub"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        app:layout_constraintEnd_toStartOf="@+id/price"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_name"
+        tools:text="1565" />
+
+    <TextView
+        android:id="@+id/price"
+        style="@style/Product_card_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/rub"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/tv_name" />
+
+
+    <!--артикул    -->
+    <TextView
+        android:id="@+id/vendor_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:text="@string/art_"
+        app:layout_constraintBottom_toTopOf="@+id/ti_layout"
+        app:layout_constraintStart_toStartOf="@+id/guideline8" />
+
+    <TextView
+        android:id="@+id/tv_vendor_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/vendor_code"
+        app:layout_constraintStart_toEndOf="@+id/vendor_code"
+        app:layout_constraintTop_toTopOf="@+id/vendor_code"
+        tools:text="1254864684" />
+
+    <ImageView
+        android:id="@+id/iv_copy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/vendor_code"
+        app:layout_constraintStart_toEndOf="@+id/tv_vendor_code"
+        app:layout_constraintTop_toTopOf="@+id/vendor_code"
+        app:srcCompat="@drawable/copy" />
+    <!--кнопки-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/parameters_btn_horizontal_margin"
+        android:hint="@string/choose_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bt_basket"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        tools:ignore="ExtraText">
+
+        <AutoCompleteTextView
+            android:id="@+id/tv_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            tools:ignore="LabelFor" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_basket"
+        style="@style/BottomButtonTheme.Dark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/parameters_btn_horizontal_margin"
+        android:text="@string/basket"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guideline9"
+        app:layout_constraintStart_toEndOf="@+id/ti_layout" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/parameters_btn_horizontal_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/parameters_btn_horizontal_margin" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gr_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tv_price,tv_name,vendor_code,bt_basket,price,ti_layout,tv_vendor_code,iv_copy,imageSwitcher" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
