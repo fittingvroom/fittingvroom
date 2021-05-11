@@ -2,9 +2,13 @@ package com.fittingvroom.model.repository
 
 import com.fittingvroom.model.entitis.Category
 import com.fittingvroom.model.entitis.Product
+import com.fittingvroom.model.room.FavoritesEntity
+import com.fittingvroom.model.room.FittingDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
-class TestProductRepoImpl : IProructRepo {
+class TestProductRepoImpl(val database: FittingDatabase) : IProructRepo {
     val categorys: List<Category> = listOf(
         Category(0, "Джинсы", "file:///android_asset/category/джинсы.png"),
         Category(1, "Рубашки", "file:///android_asset/category/рубашки.png"),
@@ -39,4 +43,20 @@ val prodicts= listOf<Product>(
     }
 
     override suspend fun getProduct(id: Int) = prodicts.filter { it.id==id }.firstOrNull()
+
+   override suspend fun getFavorites ()=prodicts.filter {product-> database.FavoritesDao().all()?.any { it.idProduct==product.id }!! }
+
+   override suspend fun setFavorite (id: Int){
+
+            if(database.FavoritesDao().getProduct(id)==null)
+                database.FavoritesDao().insert(FavoritesEntity(id))
+            else
+                database.FavoritesDao().delete(FavoritesEntity(id))
+
+    }
+
+    override suspend fun getFavorite (id: Int):Boolean
+    {
+        return database.FavoritesDao().getProduct(id)!=null
+    }
 }
