@@ -170,12 +170,13 @@ class ProductCardFragment : Fragment() {
     }
 
     private fun showFavorite(isFavorite: Boolean) {
+        val binding = viewBinding ?: return
         if (isFavorite) {
-            viewBinding?.imgFavorites?.visibility = View.GONE
-            viewBinding?.imgFavoritesOn?.visibility = View.VISIBLE
+            binding.imgFavorites.visibility = View.GONE
+            binding.imgFavoritesOn.visibility = View.VISIBLE
         } else {
-            viewBinding?.imgFavorites?.visibility = View.VISIBLE
-            viewBinding?.imgFavoritesOn?.visibility = View.GONE
+            binding.imgFavorites.visibility = View.VISIBLE
+            binding.imgFavoritesOn.visibility = View.GONE
         }
     }
 
