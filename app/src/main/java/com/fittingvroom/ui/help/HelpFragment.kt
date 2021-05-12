@@ -25,6 +25,9 @@ class HelpFragment : Fragment() {
         binding.btOk.setOnClickListener {
             navigation.popBackStack()
         }
+        binding.btnClose.setOnClickListener {
+            navigation.popBackStack()
+        }
         return view
     }
 

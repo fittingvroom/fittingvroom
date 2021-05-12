@@ -28,6 +28,14 @@
         <argument
             android:name="SIZE_PRODUCT"
             app:argType="string" />
+        <action
+            android:id="@+id/action_navigation_fitting_to_help_fragment"
+            app:destination="@id/help_fragment"
+            app:popUpTo="@id/navigation_fitting" />
+        <action
+            android:id="@+id/action_navigation_fitting_to_pick_up_fragment"
+            app:destination="@id/pickUpFragment"
+            app:popUpTo="@id/navigation_fitting" />
     </fragment>
 
     <fragment
