@@ -25,27 +25,24 @@ val modelScreen = module {
 val modelParametersScreen = module {
     factory { ModelParametersViewModel(get()) }
 }
+
 val repositoryModule = module {
 
-    fun provideCountryRepository( database : FittingDatabase): IProructRepo {
-        return TestProductRepoImpl( database)
+    fun provideCountryRepository(database: FittingDatabase): IProructRepo {
+        return TestProductRepoImpl(database)
     }
     single { provideCountryRepository(get()) }
-
 }
 
 val fittingScreen = module {
     factory { FittingViewModel(get()) }
-
-val modelPickUp = module {
-    factory { PickUpRvViewModel(TestProductRepoImpl())}
 }
 
+val modelPickUp = module {
     viewModel { PickUpRvViewModel(get()) }
 }
 
 val databaseModule = module {
-
     fun provideDatabase(application: Application): FittingDatabase {
         return Room.databaseBuilder(application, FittingDatabase::class.java, "db")
             .fallbackToDestructiveMigration()
