@@ -54,7 +54,7 @@
     <string name="parameter_continue_btn">Продолжить</string>
     <string name="no_parameters_error">Введите все параметры!</string>
 
-    <!--    pick up screen-->
+<!--    pick up screen-->
     <string name="no_data">Нет данных</string>
     <string name="pick_up_the_image">Подобрать образ</string>
     <string name="сhoose_an_image">Выбрать образ</string>
@@ -66,7 +66,7 @@
     <string name="no_size">Не выбран размер</string>
 
 <!--    Fitting screen-->
+    <string name="fitting_screen_bottom_btn_text">Выбрать образ</string>
     <string name="fitting_toolbar_title">Подобрать образ</string>
-    <string name="fitting_to_pick_up_btn_text">Выбрать образ</string>
 
 </resources>

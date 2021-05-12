@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.fittingvroom.datasource.parameters.SaveModelParameters
 import com.fittingvroom.datasource.parameters.SharedPreferencesImplementation
+import com.fittingvroom.ui.fitting.FittingViewModel
 import com.fittingvroom.model.repository.IProructRepo
 import com.fittingvroom.model.repository.TestProductRepoImpl
 import com.fittingvroom.model.room.FittingDatabase
@@ -33,9 +34,13 @@ val repositoryModule = module {
 
 }
 
-
+val fittingScreen = module {
+    factory { FittingViewModel(get()) }
 
 val modelPickUp = module {
+    factory { PickUpRvViewModel(TestProductRepoImpl())}
+}
+
     viewModel { PickUpRvViewModel(get()) }
 }
 
@@ -47,5 +52,4 @@ val databaseModule = module {
             .build()
     }
     single { provideDatabase(get()) }
-
 }

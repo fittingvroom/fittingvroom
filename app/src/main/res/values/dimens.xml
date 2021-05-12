@@ -11,8 +11,14 @@
     <dimen name="pick_up_margin_top_text">6dp</dimen>
     <dimen name="pick_up_margin_start_rub">5dp</dimen>
     <dimen name="pick_up_margin_item">5dp</dimen>
+
+    <dimen name="fitting_favorites_image_width">30dp</dimen>
+    <dimen name="fitting_favorites_image_height">30dp</dimen>
+    <dimen name="fitting_cart_add_margin_bottom">30dp</dimen>
+
     <dimen name="DotsIndicatorRadius">8dp</dimen>
     <dimen name="DotsIndicator_dotsize">10dp</dimen>
     <dimen name="DotsIndicator_spacing">4dp</dimen>
     <dimen name="DotsIndicator_margin_bot">34dp</dimen>
+
 </resources>

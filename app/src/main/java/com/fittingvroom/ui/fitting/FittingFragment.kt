@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
+import com.fittingvroom.data.ModelParametersData
 import com.fittingvroom.databinding.FragmentFittingBinding
+import com.fittingvroom.model.AppState
+import com.fittingvroom.ui.base.BaseFragment
 import com.fittingvroom.ui.pick_up.ProductCardFragment
 import com.fittingvroom.ui.view3d.SceneViewer
+import org.koin.android.viewmodel.ext.android.viewModel
 
+class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
 
-class FittingFragment : Fragment() {
-
-    private var binding: FragmentFittingBinding? = null
+    override lateinit var model: FittingViewModel
+    private var viewBinding: FragmentFittingBinding? = null
     private val navigation by lazy { findNavController() }
     private var productId: Int? = null
     private var productSize: String? = null
@@ -24,50 +28,101 @@ class FittingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFittingBinding.inflate(inflater, container, false)
-        initToolbarNavigation()
-        val view = binding?.root
-        SceneViewer.showScene(context, resources, binding?.fittingSceneView, binding?.fittingPb)
-        binding?.mannequinHelpImageBtn?.setOnClickListener {
-            navigation.navigate(R.id.action_navigation_fitting_to_help_fragment)
-        }
-        binding?.fittingToPickUpButton?.setOnClickListener {
-            navigation.navigate(R.id.action_navigation_fitting_to_pick_up_fragment)
-        }
+        viewBinding = FragmentFittingBinding.inflate(inflater, container, false)
+        val view = viewBinding?.root
+        initViewModel()
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initToolbarNavigation()
+        setBtnListeners()
         productId = arguments?.getInt(ProductCardFragment.ID_PRODICT) ?: 0
         productSize = arguments?.getString(ProductCardFragment.SIZE_PRODICT) ?: ""
         if (productId == null || productSize.isNullOrEmpty()) {
             binding?.fittingFavoriteBtn?.visibility = View.GONE
             binding?.fittingCartAddBtn?.visibility = View.GONE
-        }
+           model.getData()
+    }
+
+    private fun initViewModel() {
+        val viewModel : FittingViewModel by viewModel()
+        model = viewModel
+        model.subscribe().observe(viewLifecycleOwner, { renderData(it) })
     }
 
     private fun initToolbarNavigation() {
-        binding?.apply {
-            this.fittingToolbar.setNavigationIcon(R.drawable.ic_toolbar_back_btn)
-            this.fittingToolbar.setNavigationOnClickListener {
-                navigation.popBackStack()
+        val binding = viewBinding ?: return
+        binding.fittingToolbar.setNavigationIcon(R.drawable.ic_toolbar_back_btn)
+        binding.fittingToolbar.setNavigationOnClickListener {
+            navigation.popBackStack()
+        } 
+    }
+
+    private fun setBtnListeners() {
+        val binding = viewBinding ?: return
+        binding.fittingBottomButton.setOnClickListener {
+            navigation.navigate(R.id.action_navigation_fitting_to_pickUpFragment)
+        }
+        binding.fittingHelpImageBtn.setOnClickListener {
+            navigation.navigate(R.id.action_navigation_fitting_to_help_fragment)
+        }
+        binding.fittingShareImageBtn.setOnClickListener {
+            Toast.makeText(requireContext(), "Поделиться", Toast.LENGTH_SHORT).show()
+        }
+        binding.fittingFavoriteImageBtn.setOnClickListener {
+
+        }
+    }
+
+    override fun onPause() {
+        viewBinding?.fittingSceneView?.pause()
+        super.onPause()
+    }
+    override fun onResume() {
+        viewBinding?.fittingSceneView?.resume()
+        super.onResume()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        viewBinding = null
+    }
+
+    override fun renderData(state: AppState<ModelParametersData>) {
+        when (state) {
+            is AppState.Success -> {
+                val dataModel : ModelParametersData = state.data
+                showViewSuccess()
+                if (dataModel.isSaved) {
+                    showSceneView()
+                    SceneViewer.showScene(requireContext(), resources, viewBinding?.fittingSceneView, viewBinding?.fittingSceneViewPb)
+                } else {
+                    showImageView()
+                }
+            }
+            is AppState.Error -> {
+
             }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding?.fittingSceneView?.resume()
+    private fun showSceneView() {
+        val binding = viewBinding ?: return
+        binding.fittingImageViewMannequin.visibility = View.GONE
+        binding.fittingSceneView.visibility = View.VISIBLE
+        binding.fittingSceneViewPb.visibility = View.GONE
     }
 
-
-    override fun onPause() {
-        super.onPause()
-        binding?.fittingSceneView?.pause()
+    private fun showImageView() {
+        val binding = viewBinding ?: return
+        binding.fittingImageViewMannequin.visibility = View.VISIBLE
+        binding.fittingSceneView.visibility = View.GONE
+        binding.fittingSceneViewPb.visibility = View.GONE
     }
 
-    override fun onDestroy() {
-        binding = null
-        super.onDestroy()
+    private fun showViewSuccess() {
+        val binding = viewBinding ?: return
+        binding.fittingSuccesLayout.visibility = View.VISIBLE
     }
 }
