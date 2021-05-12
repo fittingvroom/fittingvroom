@@ -24,8 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/pick_up_margin_top_text"
-        android:fontFamily="sans-serif-black"
-        android:textSize="@dimen/pick_up_font_size"
+        style="@style/Product_card_text"
         tools:text="Рубашка" />
 
     <LinearLayout
@@ -38,17 +37,16 @@
             android:id="@+id/tv_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:textSize="@dimen/pick_up_font_size"
+            style="@style/Product_card_text"
             tools:text="15000" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/pick_up_margin_start_rub"
-            android:fontFamily="sans-serif-black"
+
             android:text="@string/rub"
-            android:textSize="@dimen/pick_up_font_size" />
+            style="@style/Product_card_text"/>
     </LinearLayout>
 
 
@@ -57,8 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/pick_up_margin_top_text"
-        android:fontFamily="sans-serif-black"
-        android:textSize="@dimen/pick_up_font_size"
+        style="@style/Product_card_text"
         tools:text="Белый" />
 
 </LinearLayout>

@@ -11,12 +11,18 @@ class FittingVRoomApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(applicationContext)
-            modules(listOf(
-                application,
-                modelParametersScreen,
-                modelPickUp,
-                modelScreen,
-                fittingScreen))
+
+            modules(
+                listOf(
+                    application,
+                    modelParametersScreen,
+                    modelPickUp,
+                    modelScreen,
+                    databaseModule,
+                    repositoryModule,
+                    fittingScreen
+                )
+            )
         }
     }
 }

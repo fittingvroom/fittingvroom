@@ -14,14 +14,13 @@ import com.fittingvroom.model.entitis.Product
 import com.fittingvroom.ui.pick_up.ProductCardFragment.Companion.ID_PRODICT
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class PickUpRvFragment : Fragment() {
+class FavoriteRvFragment : Fragment() {
 
     companion object {
-        fun newInstance() = PickUpRvFragment()
-        const val ID_CATEGORY = "ID_CATEGORY"
+        fun newInstance() = FavoriteRvFragment()
     }
 
-    private var idCategory: Int = 0
+
     private val adapter: PickUpAdapter by lazy { PickUpAdapter(onListItemClickListener) }
     private var viewBinding: FragmentPickUpRvBinding? = null
     private val navigation by lazy { findNavController() }
@@ -36,7 +35,7 @@ class PickUpRvFragment : Fragment() {
         viewBinding = FragmentPickUpRvBinding.inflate(inflater, container, false)
         val view = viewBinding?.root
         initViewModel()
-        idCategory = arguments?.getInt(ID_CATEGORY) ?: 0
+
         return view
     }
 
@@ -68,7 +67,7 @@ class PickUpRvFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.getProducts(idCategory).observe(viewLifecycleOwner, { it ->
+        viewModel.getFavorites().observe(viewLifecycleOwner, { it ->
             it?.let { result ->
                 when (result) {
                     is AppState.Success -> {

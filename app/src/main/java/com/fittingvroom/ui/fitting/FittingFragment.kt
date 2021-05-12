@@ -11,6 +11,7 @@ import com.fittingvroom.data.ModelParametersData
 import com.fittingvroom.databinding.FragmentFittingBinding
 import com.fittingvroom.model.AppState
 import com.fittingvroom.ui.base.BaseFragment
+import com.fittingvroom.ui.pick_up.ProductCardFragment
 import com.fittingvroom.ui.view3d.SceneViewer
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -19,7 +20,8 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
     override lateinit var model: FittingViewModel
     private var viewBinding: FragmentFittingBinding? = null
     private val navigation by lazy { findNavController() }
-
+    private var productId: Int? = null
+    private var productSize: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +38,12 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
         super.onViewCreated(view, savedInstanceState)
         initToolbarNavigation()
         setBtnListeners()
-        model.getData()
+        productId = arguments?.getInt(ProductCardFragment.ID_PRODICT) ?: 0
+        productSize = arguments?.getString(ProductCardFragment.SIZE_PRODICT) ?: ""
+        if (productId == null || productSize.isNullOrEmpty()) {
+            binding?.fittingFavoriteBtn?.visibility = View.GONE
+            binding?.fittingCartAddBtn?.visibility = View.GONE
+           model.getData()
     }
 
     private fun initViewModel() {
@@ -50,7 +57,7 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
         binding.fittingToolbar.setNavigationIcon(R.drawable.ic_toolbar_back_btn)
         binding.fittingToolbar.setNavigationOnClickListener {
             navigation.popBackStack()
-        }
+        } 
     }
 
     private fun setBtnListeners() {

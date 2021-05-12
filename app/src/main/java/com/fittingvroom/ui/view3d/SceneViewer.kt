@@ -15,7 +15,25 @@ import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.FootprintSelectionVisualizer
 import com.google.ar.sceneform.ux.TransformationSystem
 
-val MODEL_URI = "https://github.com/shindje/model/blob/master/model(server_telegram).glb?raw=true"
+//Если модель не отображается на эмуляторе, проверьте:
+
+//Версии:
+//Android Studio 3.1 or later.
+//Android Emulator 27.2.9 or later.
+
+//Настройка эмулятора для поддержки OpenGL ES 3.0:
+//Нажать "More" (3 точки) в toolbar запущенного эмулятора.
+//Выбрать Settings > Advanced > OpenGL ES API level > Renderer maximum (up to OpenGL ES 3.1).
+//Перезапустить эмулятор.
+
+//Подробнее: https://developers.google.com/sceneform/develop/android-quickstart?hl=ru
+
+
+//Также, обязателен вызов resume() для SceneView в onResume() фрагмента или активити
+
+
+//Временная ссылка для модели, пока не готов бэкэнд
+val MODEL_URI = "https://github.com/fittingvroom/model_example/blob/main/model_example.glb?raw=true"
 
 class SceneViewer {
     companion object {

@@ -12,7 +12,7 @@
         android:title="@string/title_fitting" />
 
     <item
-        android:id="@+id/navigation_favorites"
+        android:id="@+id/favoriteRvFragment"
         android:icon="@drawable/ic_favorites_black_24dp"
         android:title="@string/title_favorites" />
 
