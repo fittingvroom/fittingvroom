@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="?attr/actionBarSize"
-    tools:context=".ui.model.ModelFragment">
+    tools:context=".ui.pick_up.ProductCardFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -82,7 +82,15 @@
         android:src="@drawable/favorite_border"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         app:layout_constraintTop_toBottomOf="@+id/img_basket"
-
+        app:layout_constraintEnd_toStartOf="@+id/guideline9" />
+    <ImageView
+        android:id="@+id/img_favorites_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/favorite"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintTop_toBottomOf="@+id/img_basket"
         app:layout_constraintEnd_toStartOf="@+id/guideline9" />
     <ImageView
         android:id="@+id/img_try_on"

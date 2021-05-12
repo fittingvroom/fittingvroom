@@ -105,4 +105,10 @@
             app:destination="@id/navigation_fitting"
             app:popUpTo="@id/productCardFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/favoriteRvFragment"
+        android:name="com.fittingvroom.ui.pick_up.FavoriteRvFragment"
+        android:label="FavoriteRvFragment"
+        tools:layout="@layout/fragment_pick_up_rv"
+        />
 </navigation>

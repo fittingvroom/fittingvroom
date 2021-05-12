@@ -114,9 +114,13 @@ class ProductCardFragment : Fragment() {
             }
         }
         binding.imgFavorites.setOnClickListener {
-            //************************
-            Toast.makeText(context, "Сдесь должно быть избранное", Toast.LENGTH_SHORT)
-                .show()
+            viewModel.setFavorites(idProduct)
+            showFavorite(true)
+
+        }
+        binding.imgFavoritesOn.setOnClickListener {
+            viewModel.setFavorites(idProduct)
+            showFavorite(false)
         }
     }
 
@@ -146,6 +150,7 @@ class ProductCardFragment : Fragment() {
                         viewBinding?.apply { progressBar.visibility = View.GONE }
                         result.data.let { prduct ->
                             showSuccess(prduct)
+
                         }
                     }
                     is AppState.Error -> {
@@ -159,6 +164,20 @@ class ProductCardFragment : Fragment() {
 
 
         })
+        viewModel.getFavorites(idProduct).observe(viewLifecycleOwner,{isFavorite->
+            showFavorite(isFavorite)
+        })
+    }
+
+    private fun showFavorite(isFavorite: Boolean) {
+        val binding = viewBinding ?: return
+        if (isFavorite) {
+            binding.imgFavorites.visibility = View.GONE
+            binding.imgFavoritesOn.visibility = View.VISIBLE
+        } else {
+            binding.imgFavorites.visibility = View.VISIBLE
+            binding.imgFavoritesOn.visibility = View.GONE
+        }
     }
 
     fun isSizeSelected(): Boolean {
