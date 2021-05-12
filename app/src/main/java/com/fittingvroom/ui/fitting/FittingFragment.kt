@@ -43,8 +43,8 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
         if (productId == null || productSize.isNullOrEmpty()) {
             viewBinding?.fittingFavoriteImageBtn?.visibility = View.GONE
             viewBinding?.fittingCartAddBtn?.visibility = View.GONE
-            model.getData()
         }
+        model.getData()
     }
 
     private fun initViewModel() {
