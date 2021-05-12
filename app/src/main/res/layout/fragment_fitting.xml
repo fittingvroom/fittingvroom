@@ -47,7 +47,7 @@
             android:scaleX="2"
             android:scaleY="2"
             android:src="@drawable/girl_home_page"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@id/fitting_guideline"
             app:layout_constraintStart_toStartOf="@id/fitting_guideline"
             tools:ignore="ContentDescription" />
@@ -57,14 +57,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <ProgressBar
             android:id="@+id/fitting_scene_view_pb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone" />
+            android:visibility="invisible" />
     </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatImageButton
@@ -79,6 +79,17 @@
         app:layout_constraintTop_toBottomOf="@+id/fitting_toolbar" />
 
     <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fitting_favorite_image_btn"
+        android:layout_width="@dimen/fitting_favorites_image_width"
+        android:layout_height="@dimen/fitting_favorites_image_height"
+        android:layout_marginTop="@dimen/mannequin_share_image_margin_top"
+        android:layout_marginEnd="@dimen/mannequin_share_image_margin_end"
+        android:background="@color/transparent_background"
+        android:src="@drawable/ic_favorite_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fitting_help_image_btn" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/fitting_share_image_btn"
         android:layout_width="@dimen/mannequin_share_image_width"
         android:layout_height="@dimen/mannequin_share_image_height"
@@ -87,7 +98,18 @@
         android:background="@color/transparent_background"
         android:src="@drawable/ic_shared_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fitting_help_image_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/fitting_favorite_image_btn" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fitting_cart_add_btn"
+        android:layout_width="@dimen/fitting_favorites_image_width"
+        android:layout_height="@dimen/fitting_favorites_image_height"
+        android:layout_marginBottom="@dimen/fitting_cart_add_margin_bottom"
+        android:layout_marginEnd="@dimen/mannequin_share_image_margin_end"
+        android:background="@color/transparent_background"
+        android:src="@drawable/ic_cart_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fitting_bottom_button" />
 
     <com.google.android.material.button.MaterialButton
         style="@style/BottomButtonTheme.Dark"

@@ -5,24 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
 import com.fittingvroom.data.ModelParametersData
 import com.fittingvroom.databinding.FragmentFittingBinding
-import com.fittingvroom.databinding.FragmentModelBinding
 import com.fittingvroom.model.AppState
 import com.fittingvroom.ui.base.BaseFragment
-import com.fittingvroom.ui.model.ModelViewModel
 import com.fittingvroom.ui.view3d.SceneViewer
 import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
 
     override lateinit var model: FittingViewModel
     private var viewBinding: FragmentFittingBinding? = null
     private val navigation by lazy { findNavController() }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,13 +56,16 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
     private fun setBtnListeners() {
         val binding = viewBinding ?: return
         binding.fittingBottomButton.setOnClickListener {
-//            navigation.navigate(R.id.action_navigation_model_to_modelParametersFragment)
+            navigation.navigate(R.id.action_navigation_fitting_to_pickUpFragment)
         }
         binding.fittingHelpImageBtn.setOnClickListener {
-//            navigation.navigate(R.id.action_navigation_model_to_help_fragment)
+            navigation.navigate(R.id.action_navigation_fitting_to_help_fragment)
         }
         binding.fittingShareImageBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Поделиться", Toast.LENGTH_SHORT).show()
+        }
+        binding.fittingFavoriteImageBtn.setOnClickListener {
+
         }
     }
 
@@ -89,7 +89,7 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
                 showViewSuccess()
                 if (dataModel.isSaved) {
                     showSceneView()
-                    SceneViewer.showScene(context, resources, viewBinding?.fittingSceneView, viewBinding?.fittingSceneViewPb)
+                    SceneViewer.showScene(requireContext(), resources, viewBinding?.fittingSceneView, viewBinding?.fittingSceneViewPb)
                 } else {
                     showImageView()
                 }
@@ -104,7 +104,7 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
         val binding = viewBinding ?: return
         binding.fittingImageViewMannequin.visibility = View.GONE
         binding.fittingSceneView.visibility = View.VISIBLE
-        binding.fittingSceneView.visibility = View.GONE
+        binding.fittingSceneViewPb.visibility = View.GONE
     }
 
     private fun showImageView() {

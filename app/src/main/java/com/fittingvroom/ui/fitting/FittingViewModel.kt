@@ -29,9 +29,4 @@ class FittingViewModel(
     override fun handleError(error: Throwable) {
         _mutableLiveData.postValue(AppState.Error(error))
     }
-
-    override fun onCleared() {
-        _mutableLiveData.value = AppState.Success(ModelParametersData())
-        super.onCleared()
-    }
 }

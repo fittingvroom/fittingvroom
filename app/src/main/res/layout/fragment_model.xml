@@ -47,7 +47,7 @@
             android:scaleX="0.75"
             android:scaleY="0.75"
             android:src="@drawable/mannequin"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@id/model_guideline"
             app:layout_constraintStart_toStartOf="@id/model_guideline"
             tools:ignore="ContentDescription" />
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <ProgressBar
             android:id="@+id/model_scene_view_pb"

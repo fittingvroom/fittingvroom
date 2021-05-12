@@ -20,7 +20,14 @@
         android:id="@+id/navigation_fitting"
         android:name="com.fittingvroom.ui.fitting.FittingFragment"
         android:label="@string/title_fitting"
-        tools:layout="@layout/fragment_fitting" />
+        tools:layout="@layout/fragment_fitting" >
+        <action
+            android:id="@+id/action_navigation_fitting_to_pickUpFragment"
+            app:destination="@id/pickUpFragment" />
+        <action
+            android:id="@+id/action_navigation_fitting_to_help_fragment"
+            app:destination="@id/help_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_model"
@@ -65,9 +72,4 @@
         android:name="com.fittingvroom.ui.pick_up.PickUpFragment"
         android:label="PickUpFragment"
         tools:layout="@layout/fragment_pick_up"/>
-    <fragment
-        android:id="@+id/pickUpRvFragment"
-        android:name="com.fittingvroom.ui.pick_up.PickUpRvFragment"
-        android:label="fragment_pick_up_rv"
-        tools:layout="@layout/fragment_pick_up_rv" />
 </navigation>

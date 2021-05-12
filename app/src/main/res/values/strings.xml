@@ -61,5 +61,6 @@
     <string name="rub"> Руб.</string>
     <string name="fitting_screen_bottom_btn_text">Выбрать образ</string>
     <string name="fitting_toolbar_title">Подобрать образ</string>
+    <string name="fitting_to_pick_up_btn_text">Текст</string>
 
 </resources>

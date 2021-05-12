@@ -85,7 +85,7 @@ class ModelFragment : BaseFragment<AppState<ModelParametersData>>() {
                 showViewSuccess()
                 if (dataModel.isSaved) {
                     showSceneView()
-                    SceneViewer.showScene(context, resources, viewBinding?.modelSceneView, viewBinding?.modelSceneViewPb)
+                    SceneViewer.showScene(requireContext(), resources, viewBinding?.modelSceneView, viewBinding?.modelSceneViewPb)
                 } else {
                     showImageView()
                 }

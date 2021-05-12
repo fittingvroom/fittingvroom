@@ -4,6 +4,7 @@ import com.fittingvroom.model.repository.TestProductRepoImpl
 import com.fittingvroom.ui.model.parameters.ModelParametersViewModel
 import com.fittingvroom.datasource.parameters.SaveModelParameters
 import com.fittingvroom.datasource.parameters.SharedPreferencesImplementation
+import com.fittingvroom.ui.fitting.FittingViewModel
 import com.fittingvroom.ui.model.ModelViewModel
 import com.fittingvroom.ui.pick_up.PickUpRvViewModel
 import com.fittingvroom.ui.view3d.SceneViewer
@@ -23,4 +24,8 @@ val modelParametersScreen = module {
 
 val modelPickUp = module {
     factory { PickUpRvViewModel(TestProductRepoImpl())}
+}
+
+val fittingScreen = module {
+    factory { FittingViewModel(get()) }
 }
