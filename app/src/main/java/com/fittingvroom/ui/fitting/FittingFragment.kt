@@ -41,13 +41,14 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
         productId = arguments?.getInt(ProductCardFragment.ID_PRODICT) ?: 0
         productSize = arguments?.getString(ProductCardFragment.SIZE_PRODICT) ?: ""
         if (productId == null || productSize.isNullOrEmpty()) {
-            binding?.fittingFavoriteBtn?.visibility = View.GONE
-            binding?.fittingCartAddBtn?.visibility = View.GONE
-           model.getData()
+            viewBinding?.fittingFavoriteImageBtn?.visibility = View.GONE
+            viewBinding?.fittingCartAddBtn?.visibility = View.GONE
+            model.getData()
+        }
     }
 
     private fun initViewModel() {
-        val viewModel : FittingViewModel by viewModel()
+        val viewModel: FittingViewModel by viewModel()
         model = viewModel
         model.subscribe().observe(viewLifecycleOwner, { renderData(it) })
     }
@@ -57,13 +58,13 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
         binding.fittingToolbar.setNavigationIcon(R.drawable.ic_toolbar_back_btn)
         binding.fittingToolbar.setNavigationOnClickListener {
             navigation.popBackStack()
-        } 
+        }
     }
 
     private fun setBtnListeners() {
         val binding = viewBinding ?: return
         binding.fittingBottomButton.setOnClickListener {
-            navigation.navigate(R.id.action_navigation_fitting_to_pickUpFragment)
+            navigation.navigate(R.id.action_navigation_fitting_to_pick_up_fragment)
         }
         binding.fittingHelpImageBtn.setOnClickListener {
             navigation.navigate(R.id.action_navigation_fitting_to_help_fragment)
@@ -80,10 +81,12 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
         viewBinding?.fittingSceneView?.pause()
         super.onPause()
     }
+
     override fun onResume() {
         viewBinding?.fittingSceneView?.resume()
         super.onResume()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         viewBinding = null
@@ -92,11 +95,16 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
     override fun renderData(state: AppState<ModelParametersData>) {
         when (state) {
             is AppState.Success -> {
-                val dataModel : ModelParametersData = state.data
+                val dataModel: ModelParametersData = state.data
                 showViewSuccess()
                 if (dataModel.isSaved) {
                     showSceneView()
-                    SceneViewer.showScene(requireContext(), resources, viewBinding?.fittingSceneView, viewBinding?.fittingSceneViewPb)
+                    SceneViewer.showScene(
+                        requireContext(),
+                        resources,
+                        viewBinding?.fittingSceneView,
+                        viewBinding?.fittingSceneViewPb
+                    )
                 } else {
                     showImageView()
                 }
