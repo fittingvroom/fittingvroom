@@ -105,9 +105,8 @@ class ProductCardFragment : Fragment() {
         binding.imgBasket.setOnClickListener { }
         binding.btBasket.setOnClickListener {
             if (isSizeSelected()) {
-            //************************
-                Toast.makeText(context, "Сдесь должна быть корзина", Toast.LENGTH_SHORT)
-                    .show()
+                //предварительно надо добавить в корзину
+                navigation.navigate(R.id.navigation_cart)
             } else {
                 Toast.makeText(context, getString(R.string.no_size), Toast.LENGTH_SHORT)
                     .show()

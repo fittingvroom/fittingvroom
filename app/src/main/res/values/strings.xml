@@ -68,5 +68,11 @@
 <!--    Fitting screen-->
     <string name="fitting_screen_bottom_btn_text">Выбрать образ</string>
     <string name="fitting_toolbar_title">Подобрать образ</string>
+    <string name="color">Цвет</string>
+    <string name="size">Размер</string>
+    <string name="total">Итого</string>
+    <string name="Basket">Корзина</string>
+    <string name="go_to_market">Перейти к оформлению заказа</string>
+    <string name="total_price">Стоймость заказа</string>
 
 </resources>

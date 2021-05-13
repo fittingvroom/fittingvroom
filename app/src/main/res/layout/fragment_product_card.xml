@@ -71,18 +71,29 @@
         android:id="@+id/img_basket"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/basket"
+        android:src="@drawable/ic_basket"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         app:layout_constraintTop_toTopOf="@+id/imageSwitcher"
         app:layout_constraintEnd_toStartOf="@+id/guideline9" />
     <ImageView
+        android:id="@+id/img_basket_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_basket_sel"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintTop_toTopOf="@+id/imageSwitcher"
+        app:layout_constraintEnd_toStartOf="@+id/guideline9" />
+
+    <ImageView
         android:id="@+id/img_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/favorite_border"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        app:layout_constraintTop_toBottomOf="@+id/img_basket"
-        app:layout_constraintEnd_toStartOf="@+id/guideline9" />
+        android:src="@drawable/favorite_border"
+        app:layout_constraintEnd_toEndOf="@+id/img_basket"
+        app:layout_constraintStart_toStartOf="@+id/img_basket"
+        app:layout_constraintTop_toBottomOf="@+id/img_basket" />
     <ImageView
         android:id="@+id/img_favorites_on"
         android:layout_width="wrap_content"
