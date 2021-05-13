@@ -10,6 +10,8 @@ interface IProructRepo {
     suspend fun setFavorite (id: Int)
     suspend fun getFavorite (id: Int):Boolean
     suspend fun getFavorites ():List<Product>?
+    suspend fun setBasket(id: Int,size:String)
+
 
 
 }

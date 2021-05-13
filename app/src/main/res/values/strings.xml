@@ -74,5 +74,6 @@
     <string name="Basket">Корзина</string>
     <string name="go_to_market">Перейти к оформлению заказа</string>
     <string name="total_price">Стоймость заказа</string>
+    <string name="added_to_basket">Добавлено в корзину</string>
 
 </resources>
