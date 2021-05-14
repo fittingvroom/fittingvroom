@@ -107,7 +107,11 @@ class ProductCardFragment : Fragment() {
 
             if (isSizeSelected()) {
                 viewModel.setBasket(idProduct, binding.tvSize.text.toString())
-                Snackbar.make(binding.imageSwitcher,R.string.added_to_basket,Snackbar.LENGTH_SHORT)
+                Snackbar.make(
+                    binding.imageSwitcher,
+                    R.string.added_to_basket,
+                    Snackbar.LENGTH_SHORT
+                )
                     .show()
 
             } else {
