@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
 import com.fittingvroom.databinding.FragmentShopcaptBinding
 import com.fittingvroom.model.AppState
-import com.fittingvroom.model.entitis.Product
+
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -21,7 +21,36 @@ class CartFragment : Fragment() {
     private lateinit var cartViewModel: CartViewModel
     private var viewBinding: FragmentShopcaptBinding? = null
     private val navigation by lazy { findNavController() }
-
+    private val adapter: CatrAdapter by lazy { CatrAdapter(onDelete, onFavotite, onAmount) }
+    val d = mutableListOf(
+        CartData(
+            1,
+            1,
+            "dfsgfs",
+            "dtgsg",
+            1000f,
+            "hgfghf",
+            "",
+            "XL",
+            "file:///android_asset/Jeans/j4.png",
+            0f,
+            1,
+            false
+        ), CartData(
+            1,
+            1,
+            "dfsgfs",
+            "dtgsg",
+            1000f,
+            "hgfghf",
+            "",
+            "XL",
+            "file:///android_asset/Jeans/j3.png",
+            0f,
+            1,
+            false
+        )
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +61,16 @@ class CartFragment : Fragment() {
         val view = viewBinding?.root
         initViewModel()
         return view
+    }
+
+    private fun setupUI() {
+        viewBinding?.data?.adapter = adapter
+        viewBinding?.data?.setHasFixedSize(true)
+
+        showSuccess(
+            d
+        )
+
     }
 
     private fun initViewModel() {
@@ -51,10 +90,11 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbarNavigation()
-        //setupUI()
+        setupUI()
         setBtnListeners()
         //setupObservers()
     }
+
     fun setBtnListeners() {
         val binding = viewBinding ?: return
         binding.btGo.setOnClickListener {
@@ -64,17 +104,28 @@ class CartFragment : Fragment() {
         }
     }
 
-    private fun showSuccess(prduct: Product?) {
-        if (prduct != null) {
+    private fun retrieveData(data: List<CartData>) {
+        adapter.apply {
+            setData(data)
+            notifyDataSetChanged()
+        }
+    }
+
+    private fun showSuccess(data: List<CartData>?) {
+
+        if (data != null) {
             viewBinding?.apply {
-                data.visibility = View.VISIBLE
+                progressBar.visibility = View.GONE
+                this.data.visibility = View.VISIBLE
                 tvNoData.visibility = View.GONE
             }
-            //retrieveData(prduct)
+            retrieveData(data)
+
 
         } else {
             viewBinding?.apply {
-                data.visibility = View.GONE
+                progressBar.visibility = View.GONE
+                this.data.visibility = View.GONE
                 tvNoData.visibility = View.VISIBLE
             }
         }
@@ -97,6 +148,40 @@ class CartFragment : Fragment() {
             tvNoData.visibility = View.GONE
         }
     }
+
+    private val onDelete: OnListItemClickListener =
+        object : OnListItemClickListener {
+            override fun onItemClick(data: CartData) {
+                adapter.apply {
+                    val index = d.indexOf(data)
+                    d.remove(data)
+                    deleteData(d, index)
+                }
+                Toast.makeText(context, "onDelete", Toast.LENGTH_SHORT).show()
+            }
+        }
+    private val onFavotite: OnListItemClickListener =
+        object : OnListItemClickListener {
+            override fun onItemClick(data: CartData) {
+                adapter.apply {
+                    val index = d.indexOf(data)
+                    d[index].favorite = !d[index].favorite
+                    updateData(d, index)
+                }
+
+            }
+        }
+    private val onAmount: OnItemSelectedListener =
+        object : OnItemSelectedListener {
+            override fun onItemSelected(data: CartData, position: Int) {
+                adapter.apply {
+                    val index = d.indexOf(data)
+                    d[index].amount = position
+                    d[index].total=d[index].price*d[index].amount
+                    updateData(d, index)
+                }
+            }
+        }
 
     override fun onDestroy() {
         super.onDestroy()

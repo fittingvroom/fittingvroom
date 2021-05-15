@@ -25,10 +25,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/favorite_border"
-            app:layout_constraintBottom_toBottomOf="@+id/ti_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_amount"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/ti_layout" />
+            app:layout_constraintTop_toTopOf="@+id/tv_amount" />
 
         <ImageView
             android:id="@+id/img_favorites_on"
@@ -36,10 +36,10 @@
             android:layout_height="wrap_content"
             android:src="@drawable/favorite"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/ti_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_amount"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/ti_layout" />
+            app:layout_constraintTop_toTopOf="@+id/tv_amount" />
 
         <ImageView
             android:id="@+id/img_delete"
@@ -186,24 +186,18 @@
             app:layout_constraintTop_toTopOf="@+id/tv_total" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/ti_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        <Spinner
+            android:id="@+id/tv_amount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:entries="@array/amount"
+            android:inputType="none"
+            android:spinnerMode="dialog"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/vendor_code"
-            app:layout_constraintTop_toBottomOf="@+id/barrier8"
-            tools:ignore="ExtraText">
+            app:layout_constraintTop_toBottomOf="@+id/barrier8" />
 
-            <AutoCompleteTextView
-                android:id="@+id/tv_amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                android:text="@string/_1_"
-                tools:ignore="LabelFor" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.constraintlayout.widget.Barrier
             android:id="@+id/barrier7"
