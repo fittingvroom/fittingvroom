@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
 import com.fittingvroom.data.ModelParametersData
@@ -38,19 +39,23 @@ class FittingFragment : BaseFragment<AppState<ModelParametersData>>() {
         super.onViewCreated(view, savedInstanceState)
         initToolbarNavigation()
         setBtnListeners()
+        hideButtonsIfNeeded()
+        model.getData()
+    }
+
+    private fun hideButtonsIfNeeded() {
         productId = arguments?.getInt(ProductCardFragment.ID_PRODICT) ?: 0
         productSize = arguments?.getString(ProductCardFragment.SIZE_PRODICT) ?: ""
         if (productId == null || productSize.isNullOrEmpty()) {
             viewBinding?.fittingFavoriteImageBtn?.visibility = View.GONE
             viewBinding?.fittingCartAddBtn?.visibility = View.GONE
         }
-        model.getData()
     }
 
     private fun initViewModel() {
         val viewModel: FittingViewModel by viewModel()
         model = viewModel
-        model.subscribe().observe(viewLifecycleOwner, { renderData(it) })
+        model.subscribe().observe(viewLifecycleOwner, Observer {renderData(it) })
     }
 
     private fun initToolbarNavigation() {
