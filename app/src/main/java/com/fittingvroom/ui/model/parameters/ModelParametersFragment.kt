@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
 import com.fittingvroom.data.ModelParametersData
@@ -63,7 +64,7 @@ class ModelParametersFragment : BaseFragment<ModelParametersData>() {
         val viewModel: ModelParametersViewModel by viewModel()
         model = viewModel
         model.subscribe()
-            .observe(viewLifecycleOwner, { renderData(it) })
+            .observe(viewLifecycleOwner, Observer { renderData(it) })
     }
 
     override fun renderData(state: ModelParametersData) {

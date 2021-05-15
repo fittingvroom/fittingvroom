@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
 import com.fittingvroom.data.ModelParametersData
@@ -41,7 +42,7 @@ class ModelFragment : BaseFragment<AppState<ModelParametersData>>() {
     private fun initViewModel() {
         val modelViewModel : ModelViewModel by viewModel()
         model = modelViewModel
-        model.subscribe().observe(viewLifecycleOwner, { renderData(it) })
+        model.subscribe().observe(viewLifecycleOwner, Observer { renderData(it) })
     }
 
     private fun initToolbarNavigation() {
