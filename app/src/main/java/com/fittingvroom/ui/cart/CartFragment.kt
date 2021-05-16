@@ -22,35 +22,6 @@ class CartFragment : Fragment() {
     private var viewBinding: FragmentShopcaptBinding? = null
     private val navigation by lazy { findNavController() }
     private val adapter: CatrAdapter by lazy { CatrAdapter(onDelete, onFavotite, onAmount) }
-    val d = mutableListOf(
-        CartData(
-            1,
-            1,
-            "dfsgfs",
-            "dtgsg",
-            1000f,
-            "hgfghf",
-            "",
-            "XL",
-            "file:///android_asset/Jeans/j4.png",
-            0f,
-            1,
-            false
-        ), CartData(
-            1,
-            1,
-            "dfsgfs",
-            "dtgsg",
-            1000f,
-            "hgfghf",
-            "",
-            "XL",
-            "file:///android_asset/Jeans/j3.png",
-            0f,
-            1,
-            false
-        )
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,11 +36,6 @@ class CartFragment : Fragment() {
 
     private fun setupUI() {
         viewBinding?.data?.adapter = adapter
-        viewBinding?.data?.setHasFixedSize(true)
-
-        showSuccess(
-            d
-        )
 
     }
 
@@ -92,7 +58,21 @@ class CartFragment : Fragment() {
         initToolbarNavigation()
         setupUI()
         setBtnListeners()
-        //setupObservers()
+        setupObservers()
+        cartViewModel.getBasket(0)
+
+    }
+
+    private fun setupObservers() {
+        cartViewModel.data.observe(viewLifecycleOwner, {
+            it?.let { result ->
+                showSuccess(result)
+            }
+        })
+        cartViewModel.total.observe(viewLifecycleOwner, {
+            viewBinding?.tvPrice?.text = it
+        })
+
     }
 
     fun setBtnListeners() {
@@ -100,28 +80,26 @@ class CartFragment : Fragment() {
         binding.btGo.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.hm.com/"))
             startActivity(browserIntent)
-
         }
     }
 
-    private fun retrieveData(data: List<CartData>) {
+    private fun retrieveData(data: List<CartData>, operation: Int, item: Int = 0) {
         adapter.apply {
-            setData(data)
-            notifyDataSetChanged()
+            when (operation) {
+                0 -> setData(data)
+                1 -> deleteData(data, item)
+            }
         }
     }
 
     private fun showSuccess(data: List<CartData>?) {
-
-        if (data != null) {
+        if (!data.isNullOrEmpty()) {
             viewBinding?.apply {
                 progressBar.visibility = View.GONE
                 this.data.visibility = View.VISIBLE
                 tvNoData.visibility = View.GONE
             }
-            retrieveData(data)
-
-
+            retrieveData(data, cartViewModel.operation, cartViewModel.item)
         } else {
             viewBinding?.apply {
                 progressBar.visibility = View.GONE
@@ -131,55 +109,22 @@ class CartFragment : Fragment() {
         }
     }
 
-    private fun showError(result: AppState.Error) {
-        viewBinding?.apply {
-            progressBar.visibility = View.GONE
-            data.visibility = View.GONE
-            tvNoData.visibility = View.VISIBLE
-        }
-        Toast.makeText(context, result.error.localizedMessage, Toast.LENGTH_LONG)
-            .show()
-    }
-
-    private fun showLoading() {
-        viewBinding?.apply {
-            progressBar.visibility = View.VISIBLE
-            data.visibility = View.GONE
-            tvNoData.visibility = View.GONE
-        }
-    }
-
     private val onDelete: OnListItemClickListener =
         object : OnListItemClickListener {
             override fun onItemClick(data: CartData) {
-                adapter.apply {
-                    val index = d.indexOf(data)
-                    d.remove(data)
-                    deleteData(d, index)
-                }
-                Toast.makeText(context, "onDelete", Toast.LENGTH_SHORT).show()
+                cartViewModel.deleteBasket(data)
             }
         }
     private val onFavotite: OnListItemClickListener =
         object : OnListItemClickListener {
             override fun onItemClick(data: CartData) {
-                adapter.apply {
-                    val index = d.indexOf(data)
-                    d[index].favorite = !d[index].favorite
-                    updateData(d, index)
-                }
-
+                cartViewModel.favoriteBasket(data)
             }
         }
     private val onAmount: OnItemSelectedListener =
         object : OnItemSelectedListener {
             override fun onItemSelected(data: CartData, position: Int) {
-                adapter.apply {
-                    val index = d.indexOf(data)
-                    d[index].amount = position
-                    d[index].total=d[index].price*d[index].amount
-                    updateData(d, index)
-                }
+                cartViewModel.amountBasket(data, position)
             }
         }
 

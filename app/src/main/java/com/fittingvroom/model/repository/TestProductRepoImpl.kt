@@ -189,5 +189,17 @@ class TestProductRepoImpl(val database: FittingDatabase) : IProructRepo {
 
     }
 
+    override suspend fun getBasket(): List<BasketEntity> {
+        return database.BasketDao().all()
+    }
+
+    override suspend fun updateBasket(id: Int,size: String,amount:Int) {
+        database.BasketDao().update(BasketEntity(id,size,amount))
+    }
+
+    override suspend fun deleteBasket(id: Int,size: String) {
+        database.BasketDao().delete(BasketEntity(id,size))
+    }
+
 
 }

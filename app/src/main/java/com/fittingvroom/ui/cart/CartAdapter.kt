@@ -84,8 +84,8 @@ class CatrAdapter(
                 binding.imgFavorites.setOnClickListener { onFavotite.onItemClick(data) }
                 binding.imgFavoritesOn.setOnClickListener { onFavotite.onItemClick(data) }
                 binding.imgDelete.setOnClickListener { onDelete.onItemClick(data) }
-                binding.tvAmount.setSelection(data.amount-1)
-                binding.tvAmount.onItemSelectedListener =object :
+                binding.tvAmount.setSelection(data.amount - 1)
+                binding.tvAmount.onItemSelectedListener = object :
                     AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(
                         parent: AdapterView<*>?,
@@ -93,10 +93,14 @@ class CatrAdapter(
                         position: Int,
                         id: Long
                     ) {
-                   onAmount.onItemSelected(data,position+1)
+                        if (data.amount != position + 1)
+                            onAmount.onItemSelected(data, position + 1)
                     }
+
                     override fun onNothingSelected(parent: AdapterView<*>?) {
                     }
+
+
                 }
             }
         }

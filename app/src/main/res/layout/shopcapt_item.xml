@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardUseCompatPadding="false"
+    android:layout_margin="@dimen/card_padding"
     android:background="?android:attr/selectableItemBackground"
+    app:cardUseCompatPadding="false"
     app:contentPadding="@dimen/card_padding">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +46,7 @@
             android:id="@+id/img_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/basket_horizontal_margin"
             android:src="@drawable/delete_border"
             app:layout_constraintBottom_toBottomOf="@+id/tv_price"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,8 +92,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginTop="@dimen/pick_up_margin_item"
             android:layout_marginStart="@dimen/pick_up_margin_item"
+            android:layout_marginTop="@dimen/pick_up_margin_item"
             android:text="@string/art_"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/tv_price" />
@@ -186,14 +188,13 @@
             app:layout_constraintTop_toTopOf="@+id/tv_total" />
 
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/tv_amount"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/dropdownListPreferredItemHeight"
+            android:layout_marginEnd="@dimen/basket_horizontal_margin"
             android:entries="@array/amount"
-            android:inputType="none"
             android:spinnerMode="dialog"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/vendor_code"
             app:layout_constraintTop_toBottomOf="@+id/barrier8" />

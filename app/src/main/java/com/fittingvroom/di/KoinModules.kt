@@ -41,7 +41,7 @@ val fittingScreen = module {
 
 val modelPickUp = module {
     viewModel { PickUpRvViewModel(get()) }
-    viewModel { CartViewModel() }
+    viewModel { CartViewModel(get()) }
 }
 
 val databaseModule = module {
