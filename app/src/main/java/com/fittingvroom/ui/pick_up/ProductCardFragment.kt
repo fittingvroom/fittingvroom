@@ -16,6 +16,7 @@ import com.fittingvroom.databinding.FragmentProductCardBinding
 import com.fittingvroom.model.AppState
 import com.fittingvroom.model.entitis.Product
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -102,12 +103,28 @@ class ProductCardFragment : Fragment() {
                     .show()
             }
         }
-        binding.imgBasket.setOnClickListener { }
+        binding.imgBasket.setOnClickListener {
+
+            if (isSizeSelected()) {
+                viewModel.setBasket(idProduct, binding.tvSize.text.toString())
+                Snackbar.make(
+                    binding.imageSwitcher,
+                    R.string.added_to_basket,
+                    Snackbar.LENGTH_SHORT
+                )
+                    .show()
+
+            } else {
+                Toast.makeText(context, getString(R.string.no_size), Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+        }
+
         binding.btBasket.setOnClickListener {
             if (isSizeSelected()) {
-            //************************
-                Toast.makeText(context, "Сдесь должна быть корзина", Toast.LENGTH_SHORT)
-                    .show()
+                viewModel.setBasket(idProduct, binding.tvSize.text.toString())
+                navigation.navigate(R.id.navigation_cart)
             } else {
                 Toast.makeText(context, getString(R.string.no_size), Toast.LENGTH_SHORT)
                     .show()
@@ -164,9 +181,10 @@ class ProductCardFragment : Fragment() {
 
 
         })
-        viewModel.getFavorites(idProduct).observe(viewLifecycleOwner,{isFavorite->
+        viewModel.getFavorites(idProduct).observe(viewLifecycleOwner, { isFavorite ->
             showFavorite(isFavorite)
         })
+
     }
 
     private fun showFavorite(isFavorite: Boolean) {
@@ -179,6 +197,7 @@ class ProductCardFragment : Fragment() {
             binding.imgFavoritesOn.visibility = View.GONE
         }
     }
+
 
     fun isSizeSelected(): Boolean {
         val binding = viewBinding ?: return false

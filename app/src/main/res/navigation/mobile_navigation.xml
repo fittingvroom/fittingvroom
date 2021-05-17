@@ -63,7 +63,7 @@
         android:id="@+id/navigation_cart"
         android:name="com.fittingvroom.ui.cart.CartFragment"
         android:label="@string/title_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_shopcapt" />
 
 
 

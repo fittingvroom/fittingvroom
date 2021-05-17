@@ -8,7 +8,7 @@ interface BasketDao {
     suspend fun all(): List<BasketEntity>
 
     @Query("SELECT * FROM BasketEntity WHERE id =:productId")
-    suspend fun getProduct(productId: Int): BasketEntity
+    suspend fun getProduct(productId: Int): BasketEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(entity: BasketEntity)
