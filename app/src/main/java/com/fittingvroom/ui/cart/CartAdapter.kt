@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fittingvroom.databinding.ShopcaptItemBinding
+
 
 class CatrAdapter(
     private var onDelete: OnListItemClickListener,
@@ -18,25 +19,15 @@ class CatrAdapter(
     RecyclerView.Adapter<CatrAdapter.RecyclerItemViewHolder>() {
 
     private lateinit var binding: ShopcaptItemBinding
-    private var data: List<CartData> = arrayListOf()
+    val dataCart: MutableList<CartData> = mutableListOf()
 
 
-    fun setData(data: List<CartData>) {
-        this.data = data
-        notifyDataSetChanged()
-
+    fun setData(newData: List<CartData>) {
+        val diffResult = DiffUtil.calculateDiff(CartDataDiffCallback(newData, dataCart))
+        dataCart.clear()
+        dataCart.addAll(newData)
+        diffResult.dispatchUpdatesTo(this)
     }
-
-    fun updateData(data: List<CartData>, item: Int) {
-        this.data = data
-        notifyItemChanged(item)
-    }
-
-    fun deleteData(data: List<CartData>, item: Int) {
-        this.data = data
-        notifyItemRemoved(item)
-    }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerItemViewHolder {
         binding = ShopcaptItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -44,21 +35,15 @@ class CatrAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerItemViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(dataCart[position])
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return dataCart.size
     }
 
     inner class RecyclerItemViewHolder(val binding: ShopcaptItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val adapter = ArrayAdapter(
-            binding.root.context,
-            android.R.layout.simple_list_item_1,
-            arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9")
-        )
-
         fun bind(data: CartData) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 binding.tvName.text = data.name

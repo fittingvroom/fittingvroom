@@ -6,13 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.fittingvroom.R
 import com.fittingvroom.databinding.FragmentShopcaptBinding
-import com.fittingvroom.model.AppState
-
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -59,7 +56,7 @@ class CartFragment : Fragment() {
         setupUI()
         setBtnListeners()
         setupObservers()
-        cartViewModel.getBasket(0)
+        cartViewModel.getBasket()
 
     }
 
@@ -83,12 +80,9 @@ class CartFragment : Fragment() {
         }
     }
 
-    private fun retrieveData(data: List<CartData>, operation: Int, item: Int = 0) {
+    private fun retrieveData(data: List<CartData>) {
         adapter.apply {
-            when (operation) {
-                0 -> setData(data)
-                1 -> deleteData(data, item)
-            }
+            setData(data)
         }
     }
 
@@ -99,7 +93,7 @@ class CartFragment : Fragment() {
                 this.data.visibility = View.VISIBLE
                 tvNoData.visibility = View.GONE
             }
-            retrieveData(data, cartViewModel.operation, cartViewModel.item)
+            retrieveData(data)
         } else {
             viewBinding?.apply {
                 progressBar.visibility = View.GONE

@@ -14,13 +14,9 @@ class CartViewModel(private val repository: IProructRepo) : ViewModel() {
     private val _total = MutableLiveData<String>()
     val total: LiveData<String> = _total
     private val cartDataList: MutableList<CartData> = mutableListOf()
-    var operation: Int = 0
-        private set
-    var item: Int = 0
-        private set
 
-    fun getBasket(operation: Int) {
-        this.operation = operation
+    fun getBasket() {
+
         viewModelScope.launch {
             cartDataList.clear()
             val basket = repository.getBasket()
@@ -55,26 +51,23 @@ class CartViewModel(private val repository: IProructRepo) : ViewModel() {
     }
 
     fun deleteBasket(data: CartData) {
-        item = cartDataList.indexOf(data)
         viewModelScope.launch {
             repository.deleteBasket(data.id, data.size)
-            getBasket(1)
-
+            getBasket()
         }
     }
 
     fun favoriteBasket(data: CartData) {
         viewModelScope.launch {
             repository.setFavorite(data.id)
-            getBasket(0)
+            getBasket()
         }
     }
 
     fun amountBasket(data: CartData, amount: Int) {
-
         viewModelScope.launch {
             repository.updateBasket(data.id, data.size, amount)
-            getBasket(0)
+            getBasket()
         }
     }
 
