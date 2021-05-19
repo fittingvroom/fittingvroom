@@ -8,6 +8,8 @@ import com.fittingvroom.ui.fitting.FittingViewModel
 import com.fittingvroom.model.repository.IProructRepo
 import com.fittingvroom.model.repository.TestProductRepoImpl
 import com.fittingvroom.model.room.FittingDatabase
+import com.fittingvroom.notifications.FirebaseNotificationService
+import com.fittingvroom.notifications.NotificationService
 import com.fittingvroom.ui.cart.CartViewModel
 import com.fittingvroom.ui.model.ModelViewModel
 import com.fittingvroom.ui.model.parameters.ModelParametersViewModel
@@ -17,6 +19,7 @@ import org.koin.dsl.module
 
 val application = module {
     factory<SaveModelParameters> { SharedPreferencesImplementation(get()) }
+    factory<NotificationService> { FirebaseNotificationService() }
 }
 
 val modelScreen = module {
