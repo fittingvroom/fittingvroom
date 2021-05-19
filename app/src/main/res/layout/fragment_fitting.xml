@@ -12,8 +12,8 @@
         android:id="@+id/fitting_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
         android:background="@color/toolbar_background"
+        android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -36,8 +36,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/fitting_image_view_mannequin"
@@ -90,6 +89,17 @@
         app:layout_constraintTop_toBottomOf="@id/fitting_help_image_btn" />
 
     <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/fitting_favorite_image_on_btn"
+        android:layout_width="@dimen/fitting_favorites_image_width"
+        android:layout_height="@dimen/fitting_favorites_image_height"
+        android:layout_marginTop="@dimen/mannequin_share_image_margin_top"
+        android:layout_marginEnd="@dimen/mannequin_share_image_margin_end"
+        android:background="@color/transparent_background"
+        android:src="@drawable/favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fitting_help_image_btn" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/fitting_share_image_btn"
         android:layout_width="@dimen/mannequin_share_image_width"
         android:layout_height="@dimen/mannequin_share_image_height"
@@ -98,26 +108,26 @@
         android:background="@color/transparent_background"
         android:src="@drawable/ic_shared_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fitting_favorite_image_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/barrier_favorite" />
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/fitting_cart_add_btn"
+        android:id="@+id/fitting_basket_btn"
         android:layout_width="@dimen/fitting_favorites_image_width"
         android:layout_height="@dimen/fitting_favorites_image_height"
-        android:layout_marginBottom="@dimen/fitting_cart_add_margin_bottom"
         android:layout_marginEnd="@dimen/mannequin_share_image_margin_end"
+        android:layout_marginBottom="@dimen/fitting_cart_add_margin_bottom"
         android:background="@color/transparent_background"
         android:src="@drawable/ic_cart_add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fitting_bottom_button" />
+        app:layout_constraintBottom_toTopOf="@id/fitting_bottom_button"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        style="@style/BottomButtonTheme.Dark"
         android:id="@+id/fitting_bottom_button"
+        style="@style/BottomButtonTheme.Dark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/fitting_screen_bottom_btn_text"
         android:drawableStart="@drawable/ic_toolbar_back_btn"
+        android:text="@string/fitting_screen_bottom_btn_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -128,5 +138,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="fitting_favorite_image_btn,fitting_favorite_image_on_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

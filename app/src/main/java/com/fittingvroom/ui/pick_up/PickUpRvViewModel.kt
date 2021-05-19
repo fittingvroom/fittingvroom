@@ -59,5 +59,11 @@ class PickUpRvViewModel(private val Repository: IProructRepo) : ViewModel() {
         viewModelScope.launch {Repository.setFavorite(id)}
 
     }
+    fun setBasket(id: Int,size:String)
+    {
+        viewModelScope.launch {Repository.setBasket(id,size)}
+
+    }
+
 
 }

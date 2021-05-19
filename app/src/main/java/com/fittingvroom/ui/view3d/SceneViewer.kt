@@ -34,28 +34,34 @@ import com.google.ar.sceneform.ux.TransformationSystem
 
 //Временная ссылка для модели, пока не готов бэкэнд
 val MODEL_URI = "https://github.com/fittingvroom/model_example/blob/main/model_example.glb?raw=true"
+val MODEL_SCALE = 0.7f
+val DRESSED_URI = "https://github.com/fittingvroom/model_example/blob/main/girl_dress.glb?raw=true"
+val DRESSED_SCALE = 0.2f
 
 class SceneViewer {
     companion object {
         @JvmStatic
-        fun showScene(context: Context?, resources: Resources, sceneView: SceneView?, progressBar: ProgressBar?) {
+        fun showScene(context: Context?, resources: Resources, sceneView: SceneView?, progressBar: ProgressBar?, dressed: Boolean) {
             if (progressBar != null)
                 progressBar.visibility = View.VISIBLE
             else
                 Toast.makeText(context, "Loading model...", Toast.LENGTH_SHORT).show()
 
+            val uri = if (dressed) DRESSED_URI else MODEL_URI
+            val scale = if (dressed) DRESSED_SCALE else MODEL_SCALE
+
             val source = RenderableSource.builder().setSource(
                     context,
-                    Uri.parse(MODEL_URI),
+                    Uri.parse(uri),
                     RenderableSource.SourceType.GLB
             )
-                    .setScale(0.7f) // Scale the original model to 70%.
+                    .setScale(scale) // Scale the original model to 70%.
                     .setRecenterMode(RenderableSource.RecenterMode.CENTER)
                     .build()
 
             ModelRenderable.builder()
                     .setSource(context, source)
-                    .setRegistryId(MODEL_URI)
+                    .setRegistryId(uri)
                     .build()
                     .thenAccept { renderable: ModelRenderable ->
                         if (progressBar != null)
